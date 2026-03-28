@@ -2,25 +2,53 @@
   const mobileQuery = window.matchMedia("(max-width: 767px)");
   const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   const isLowMotion = mobileQuery.matches || reducedMotionQuery.matches;
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const isConstrainedNetwork = Boolean(connection && (connection.saveData
+    || /(^|slow-)2g/.test(connection.effectiveType || "")));
   const overlay = window.weddingLoader;
-  const batchImages = Array.from(document.querySelectorAll("img[data-batch-src]"));
-  const BATCH_SIZE = 5;
-  let activeBatchPromise = null;
-  let hasCompletedInitialBatch = false;
-
-  if (window.AOS) {
-    AOS.init({
-      once: true,
-      duration: isLowMotion ? 0 : 700,
-      disable: () => isLowMotion,
-    });
-  }
+  const managedImages = Array.from(document.querySelectorAll("img[data-batch-src]"));
+  const INITIAL_BATCH_SIZE = mobileQuery.matches ? 4 : 6;
+  const PREFETCH_CONCURRENCY = isConstrainedNetwork ? 1 : (mobileQuery.matches ? 1 : 2);
+  const PREFETCH_PAUSE_MS = isConstrainedNetwork ? 1200 : (mobileQuery.matches ? 700 : 320);
+  const prefetchedUrls = new Set();
+  let prefetchInFlight = 0;
+  let initialLoadComplete = false;
+  let userBusyUntil = performance.now() + 400;
+  let prefetchTimer = null;
 
   if (window.Fancybox) {
     Fancybox.bind("[data-fancybox]", {
       compact: mobileQuery.matches,
       Thumbs: false,
     });
+  }
+
+  const revealElements = Array.from(document.querySelectorAll("[data-aos]"));
+  if (revealElements.length) {
+    if (isLowMotion) {
+      revealElements.forEach((element) => {
+        element.classList.add("aos-init", "aos-animate");
+      });
+    } else {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("aos-animate");
+          observer.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -8% 0px",
+      });
+
+      revealElements.forEach((element) => {
+        element.classList.add("aos-init");
+        revealObserver.observe(element);
+      });
+    }
   }
 
   document.querySelectorAll("img").forEach((img) => {
@@ -54,17 +82,20 @@
   });
 
   const markImageReady = (img) => {
-    img.dataset.batchLoaded = "true";
+    img.dataset.rendered = "true";
     img.classList.add("is-image-ready");
   };
 
-  const loadBatchImage = (img) => new Promise((resolve) => {
-    if (img.dataset.batchLoaded === "true") {
+  const applyImageSource = (img) => new Promise((resolve) => {
+    if (img.dataset.rendered === "true") {
       resolve(img);
       return;
     }
 
+    img.dataset.rendering = "true";
+
     const finalize = () => {
+      delete img.dataset.rendering;
       markImageReady(img);
       resolve(img);
     };
@@ -94,89 +125,184 @@
     img.addEventListener("error", handleError, { once: true });
 
     img.src = img.dataset.batchSrc;
+    img.setAttribute("fetchpriority", img.dataset.priority || "low");
 
     if (img.complete && img.naturalWidth > 0) {
       handleLoad();
     }
   });
 
-  const getPendingBatch = () => batchImages.filter((img) => img.dataset.batchLoaded !== "true").slice(0, BATCH_SIZE);
-
-  const buildBatchMessage = (label, batch) => {
-    if (!batch.length) {
-      return label;
+  const renderIfNeeded = (img) => {
+    if (!img || img.dataset.rendered === "true" || img.dataset.rendering === "true") {
+      return Promise.resolve(img);
     }
 
-    const firstIndex = batchImages.indexOf(batch[0]) + 1;
-    const lastIndex = firstIndex + batch.length - 1;
-    return `${label} (${firstIndex}-${lastIndex}/${batchImages.length})`;
+    return applyImageSource(img);
   };
 
-  const hasPendingImagesNearViewport = () => batchImages.some((img) => {
-    if (img.dataset.batchLoaded === "true") {
-      return false;
+  const isNearViewport = (img, margin = 420) => {
+    const rect = img.getBoundingClientRect();
+    return rect.top <= window.innerHeight + margin && rect.bottom >= -margin;
+  };
+
+  const prefetchImage = (img) => new Promise((resolve) => {
+    if (!img || img.dataset.prefetched === "true" || img.dataset.rendered === "true") {
+      resolve(img);
+      return;
     }
 
-    const rect = img.getBoundingClientRect();
-    return rect.top <= window.innerHeight + 240;
+    const src = img.dataset.batchSrc;
+    if (!src || prefetchedUrls.has(src)) {
+      img.dataset.prefetched = "true";
+      resolve(img);
+      return;
+    }
+
+    img.dataset.prefetching = "true";
+
+    const prefetch = new Image();
+    prefetch.decoding = "async";
+    prefetch.fetchPriority = "low";
+
+    const finalize = async () => {
+      try {
+        if (typeof prefetch.decode === "function") {
+          await prefetch.decode();
+        }
+      } catch (error) {
+      }
+      prefetchedUrls.add(src);
+      img.dataset.prefetched = "true";
+      delete img.dataset.prefetching;
+      resolve(img);
+    };
+
+    prefetch.onload = finalize;
+    prefetch.onerror = finalize;
+    prefetch.src = src;
   });
 
-  const loadNextBatch = (label, options = {}) => {
-    if (activeBatchPromise) {
-      return activeBatchPromise;
+  const scheduleIdleTask = (task) => {
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(() => task(), { timeout: 1200 });
+      return;
     }
 
-    const batch = getPendingBatch();
-    if (!batch.length) {
+    window.setTimeout(task, 240);
+  };
+
+  const markUserBusy = () => {
+    userBusyUntil = performance.now() + PREFETCH_PAUSE_MS;
+  };
+
+  const schedulePrefetchPump = (delay = 0) => {
+    if (prefetchTimer !== null) {
+      window.clearTimeout(prefetchTimer);
+    }
+
+    prefetchTimer = window.setTimeout(() => {
+      prefetchTimer = null;
+      pumpPrefetchQueue();
+    }, delay);
+  };
+
+  const pumpPrefetchQueue = () => {
+    if (prefetchInFlight >= PREFETCH_CONCURRENCY) {
+      return;
+    }
+
+    const remainingBusyTime = userBusyUntil - performance.now();
+    if (remainingBusyTime > 0) {
+      schedulePrefetchPump(remainingBusyTime + 40);
+      return;
+    }
+
+    const nextImage = managedImages.find((img) =>
+      img.dataset.prefetched !== "true"
+      && img.dataset.prefetching !== "true"
+      && img.dataset.rendered !== "true");
+
+    if (!nextImage) {
+      return;
+    }
+
+    prefetchInFlight += 1;
+
+    scheduleIdleTask(() => {
+      prefetchImage(nextImage)
+        .finally(() => {
+          prefetchInFlight -= 1;
+          if (isNearViewport(nextImage)) {
+            renderIfNeeded(nextImage);
+          }
+          schedulePrefetchPump(mobileQuery.matches ? 180 : 90);
+        });
+    });
+  };
+
+  const initialImages = managedImages.slice(0, INITIAL_BATCH_SIZE);
+
+  const loadInitialImages = () => {
+    if (!initialImages.length) {
       overlay?.hide();
       return Promise.resolve();
     }
 
-    const blocking = typeof options.blocking === "boolean"
-      ? options.blocking
-      : !hasCompletedInitialBatch;
+    overlay?.show(`Đang tải ảnh đầu tiên... (1-${initialImages.length}/${managedImages.length})`, {
+      blocking: true,
+    });
 
-    overlay?.show(buildBatchMessage(label, batch), { blocking });
-
-    activeBatchPromise = Promise.all(batch.map(loadBatchImage))
+    return Promise.all(initialImages.map((img) => {
+      img.dataset.priority = "high";
+      return applyImageSource(img);
+    }))
       .finally(() => {
-        activeBatchPromise = null;
-        hasCompletedInitialBatch = true;
+        initialLoadComplete = true;
         overlay?.hide();
-
-        if (hasPendingImagesNearViewport()) {
-          window.setTimeout(() => {
-            loadNextBatch("Đang tải 5 ảnh tiếp theo...", { blocking: false });
-          }, 120);
+        for (let index = 0; index < PREFETCH_CONCURRENCY; index += 1) {
+          pumpPrefetchQueue();
         }
       });
-
-    return activeBatchPromise;
   };
 
-  if (batchImages.length) {
-    batchImages.forEach((img) => {
+  if (managedImages.length) {
+    managedImages.forEach((img) => {
       img.loading = "eager";
       img.decoding = "async";
       img.setAttribute("fetchpriority", "low");
     });
 
-    loadNextBatch("Đang tải 5 ảnh đầu tiên...", { blocking: true });
+    loadInitialImages();
 
     if ("IntersectionObserver" in window) {
-      const batchObserver = new IntersectionObserver((entries) => {
-        const shouldLoad = entries.some((entry) =>
-          entry.isIntersecting && entry.target.dataset.batchLoaded !== "true");
-
-        if (shouldLoad) {
-          loadNextBatch("Đang tải 5 ảnh tiếp theo...", { blocking: false });
+      const visibilityObserver = new IntersectionObserver((entries) => {
+        if (!initialLoadComplete) {
+          return;
         }
+
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          markUserBusy();
+          renderIfNeeded(entry.target);
+          schedulePrefetchPump(PREFETCH_PAUSE_MS);
+        });
       }, {
-        rootMargin: "240px 0px",
+        rootMargin: "420px 0px",
       });
 
-      batchImages.forEach((img) => batchObserver.observe(img));
+      managedImages.forEach((img) => visibilityObserver.observe(img));
     }
+
+    ["scroll", "wheel", "touchmove", "pointermove"].forEach((eventName) => {
+      window.addEventListener(eventName, markUserBusy, { passive: true });
+    });
+    window.addEventListener("resize", () => {
+      markUserBusy();
+      schedulePrefetchPump(PREFETCH_PAUSE_MS);
+    }, { passive: true });
   } else {
     overlay?.hide();
   }

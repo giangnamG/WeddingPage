@@ -27,15 +27,11 @@ section.section-animate.is-visible{opacity:1;transform:translateY(0)}
 img{display:block}
 img[data-batch-src]{background:linear-gradient(135deg,rgba(191,147,118,.12),rgba(255,255,255,.3))}
 img.is-image-ready{transition:none}
-#about,#countdown-section,#time-line,#album,#message,#form,#gift,#thankyou{content-visibility:auto;contain-intrinsic-size:1px 900px}
-.album-item,.timeline-item,.message-item,.gift-card{content-visibility:auto;contain-intrinsic-size:1px 320px}
+#about,#countdown-section,#time-line,#album,#message,#form,#gift,#thankyou{content-visibility:visible;contain-intrinsic-size:auto}
+.album-item,.timeline-item,.message-item,.gift-card{content-visibility:visible;contain-intrinsic-size:auto}
+.img_bg{background-attachment:scroll}
 @media (max-width:767px){
-  .img_bg{background-attachment:scroll}
-  .kenburns-top,.heartbeat{animation:none!important;-webkit-animation:none!important;transform:none!important}
-  [data-aos]{transition:none!important;transform:none!important}
-  .blur-bg,.card-body{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
   .section-jump-toggle{box-shadow:0 6px 16px rgba(0,0,0,.14)}
-  section.section-animate{opacity:1!important;transform:none!important;transition:none!important;will-change:auto}
   #about,#countdown-section,#time-line,#album,#message,#form,#gift,#thankyou,.album-item,.timeline-item,.message-item,.gift-card{content-visibility:visible;contain-intrinsic-size:auto}
   .loader.loader-soft{bottom:10px!important}
   .loader-status{font-size:13px}
