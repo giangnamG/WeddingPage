@@ -20,11 +20,18 @@ const getWidths = ({ width, height, basename }) => {
     return [640, 960, 1280, 1600].filter((value) => value <= width);
   }
 
+  let widths;
   if (width >= height) {
-    return [480, 768, 960, 1280].filter((value) => value <= width);
+    widths = [480, 768, 960, 1280, 1600, 1920].filter((value) => value <= width);
+  } else {
+    widths = [320, 480, 640, 960, 1200].filter((value) => value <= width);
   }
 
-  return [320, 480, 640, 960].filter((value) => value <= width);
+  if (height > width && width > widths[widths.length - 1] && width <= 1400) {
+    widths.push(width);
+  }
+
+  return widths;
 };
 
 const ensureDir = (dirPath) => {
@@ -34,13 +41,17 @@ const ensureDir = (dirPath) => {
 const buildVariant = async (absoluteSourcePath, basename, width) => {
   const fileName = `${basename}-${width}.webp`;
   const absoluteTargetPath = path.join(outputDir, fileName);
+  const metadata = await sharp(absoluteSourcePath).metadata();
+  const isPortrait = Boolean(metadata.width && metadata.height && metadata.height > metadata.width);
+  const isBanner = BANNER_BASENAMES.has(basename);
+  const quality = isBanner
+    ? 84
+    : Math.min(isPortrait ? 86 : 84, width >= 1600 ? 86 : 100);
 
-  if (!fs.existsSync(absoluteTargetPath)) {
-    await sharp(absoluteSourcePath)
-      .resize({ width, withoutEnlargement: true })
-      .webp({ quality: BANNER_BASENAMES.has(basename) ? 76 : 74, effort: 5 })
-      .toFile(absoluteTargetPath);
-  }
+  await sharp(absoluteSourcePath)
+    .resize({ width, withoutEnlargement: true })
+    .webp({ quality, effort: 5 })
+    .toFile(absoluteTargetPath);
 
   return `./${toPosixPath(path.relative(rootDir, absoluteTargetPath))}`;
 };
@@ -50,13 +61,11 @@ const buildPlaceholder = async (absoluteSourcePath, basename, width, height) => 
   const fileName = `${basename}-tiny.webp`;
   const absoluteTargetPath = path.join(outputDir, fileName);
 
-  if (!fs.existsSync(absoluteTargetPath)) {
-    await sharp(absoluteSourcePath)
-      .resize({ width: placeholderWidth, withoutEnlargement: true })
-      .blur(0.6)
-      .webp({ quality: 54, effort: 4 })
-      .toFile(absoluteTargetPath);
-  }
+  await sharp(absoluteSourcePath)
+    .resize({ width: placeholderWidth, withoutEnlargement: true })
+    .blur(0.6)
+    .webp({ quality: 54, effort: 4 })
+    .toFile(absoluteTargetPath);
 
   return `./${toPosixPath(path.relative(rootDir, absoluteTargetPath))}`;
 };

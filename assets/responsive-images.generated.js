@@ -42,6 +42,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_09583-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_09583-1200.webp"
       }
     ]
   },
@@ -65,6 +69,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_08326-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_08326-1200.webp"
       }
     ]
   },
@@ -88,6 +96,14 @@ window.responsiveImageManifest = {
       {
         "width": 1280,
         "url": "./webp/responsive/AN_09356-1280.webp"
+      },
+      {
+        "width": 1600,
+        "url": "./webp/responsive/AN_09356-1600.webp"
+      },
+      {
+        "width": 1920,
+        "url": "./webp/responsive/AN_09356-1920.webp"
       }
     ]
   },
@@ -111,6 +127,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_08453-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_08453-1200.webp"
       }
     ]
   },
@@ -134,6 +154,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_08621-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_08621-1200.webp"
       }
     ]
   },
@@ -157,6 +181,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_08735-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_08735-1200.webp"
       }
     ]
   },
@@ -180,6 +208,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_08942-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_08942-1200.webp"
       }
     ]
   },
@@ -203,6 +235,14 @@ window.responsiveImageManifest = {
       {
         "width": 1280,
         "url": "./webp/responsive/DUC_3026-1280.webp"
+      },
+      {
+        "width": 1600,
+        "url": "./webp/responsive/DUC_3026-1600.webp"
+      },
+      {
+        "width": 1920,
+        "url": "./webp/responsive/DUC_3026-1920.webp"
       }
     ]
   },
@@ -226,6 +266,14 @@ window.responsiveImageManifest = {
       {
         "width": 1280,
         "url": "./webp/responsive/DUC_3608-1280.webp"
+      },
+      {
+        "width": 1600,
+        "url": "./webp/responsive/DUC_3608-1600.webp"
+      },
+      {
+        "width": 1920,
+        "url": "./webp/responsive/DUC_3608-1920.webp"
       }
     ]
   },
@@ -249,6 +297,14 @@ window.responsiveImageManifest = {
       {
         "width": 1280,
         "url": "./webp/responsive/DUC_3675-1280.webp"
+      },
+      {
+        "width": 1600,
+        "url": "./webp/responsive/DUC_3675-1600.webp"
+      },
+      {
+        "width": 1920,
+        "url": "./webp/responsive/DUC_3675-1920.webp"
       }
     ]
   },
@@ -272,6 +328,14 @@ window.responsiveImageManifest = {
       {
         "width": 1280,
         "url": "./webp/responsive/DUC_3772-1280.webp"
+      },
+      {
+        "width": 1600,
+        "url": "./webp/responsive/DUC_3772-1600.webp"
+      },
+      {
+        "width": 1920,
+        "url": "./webp/responsive/DUC_3772-1920.webp"
       }
     ]
   },
@@ -295,6 +359,14 @@ window.responsiveImageManifest = {
       {
         "width": 1280,
         "url": "./webp/responsive/DUC_3552-1280.webp"
+      },
+      {
+        "width": 1600,
+        "url": "./webp/responsive/DUC_3552-1600.webp"
+      },
+      {
+        "width": 1920,
+        "url": "./webp/responsive/DUC_3552-1920.webp"
       }
     ]
   },
@@ -318,6 +390,14 @@ window.responsiveImageManifest = {
       {
         "width": 1280,
         "url": "./webp/responsive/DUC_3573-1280.webp"
+      },
+      {
+        "width": 1600,
+        "url": "./webp/responsive/DUC_3573-1600.webp"
+      },
+      {
+        "width": 1920,
+        "url": "./webp/responsive/DUC_3573-1920.webp"
       }
     ]
   },
@@ -341,6 +421,14 @@ window.responsiveImageManifest = {
       {
         "width": 1280,
         "url": "./webp/responsive/DUC_3620-1280.webp"
+      },
+      {
+        "width": 1600,
+        "url": "./webp/responsive/DUC_3620-1600.webp"
+      },
+      {
+        "width": 1920,
+        "url": "./webp/responsive/DUC_3620-1920.webp"
       }
     ]
   },
@@ -364,6 +452,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/DUC_3649-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/DUC_3649-1200.webp"
       }
     ]
   },
@@ -387,6 +479,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/DUC_3795-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/DUC_3795-1200.webp"
       }
     ]
   },
@@ -410,6 +506,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_00356-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_00356-1200.webp"
       }
     ]
   },
@@ -433,6 +533,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_00457-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_00457-1200.webp"
       }
     ]
   },
@@ -452,6 +556,10 @@ window.responsiveImageManifest = {
       {
         "width": 640,
         "url": "./webp/responsive/AN_XXXX-640.webp"
+      },
+      {
+        "width": 853,
+        "url": "./webp/responsive/AN_XXXX-853.webp"
       }
     ]
   },
@@ -475,6 +583,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_00318-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_00318-1200.webp"
       }
     ]
   },
@@ -498,6 +610,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_00286-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_00286-1200.webp"
       }
     ]
   },
@@ -521,6 +637,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_09446-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_09446-1200.webp"
       }
     ]
   },
@@ -544,6 +664,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_09476-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_09476-1200.webp"
       }
     ]
   },
@@ -567,6 +691,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_09456-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_09456-1200.webp"
       }
     ]
   },
@@ -590,6 +718,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_08637-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_08637-1200.webp"
       }
     ]
   },
@@ -613,6 +745,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_08756-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_08756-1200.webp"
       }
     ]
   },
@@ -636,6 +772,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_00079-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_00079-1200.webp"
       }
     ]
   },
@@ -659,6 +799,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_09943-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_09943-1200.webp"
       }
     ]
   },
@@ -682,6 +826,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_00092-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_00092-1200.webp"
       }
     ]
   },
@@ -705,6 +853,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_08978-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_08978-1200.webp"
       }
     ]
   },
@@ -728,6 +880,14 @@ window.responsiveImageManifest = {
       {
         "width": 1280,
         "url": "./webp/responsive/AN_08987-1280.webp"
+      },
+      {
+        "width": 1600,
+        "url": "./webp/responsive/AN_08987-1600.webp"
+      },
+      {
+        "width": 1920,
+        "url": "./webp/responsive/AN_08987-1920.webp"
       }
     ]
   },
@@ -751,6 +911,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_09937-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_09937-1200.webp"
       }
     ]
   },
@@ -774,6 +938,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_09698-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_09698-1200.webp"
       }
     ]
   },
@@ -797,6 +965,10 @@ window.responsiveImageManifest = {
       {
         "width": 960,
         "url": "./webp/responsive/AN_00024-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_00024-1200.webp"
       }
     ]
   }

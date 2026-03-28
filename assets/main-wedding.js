@@ -2,6 +2,7 @@
   const mobileQuery = window.matchMedia("(max-width: 767px)");
   const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   const isLowMotion = mobileQuery.matches || reducedMotionQuery.matches;
+  const disableImageReveal = reducedMotionQuery.matches;
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   const isConstrainedNetwork = Boolean(connection && (connection.saveData
     || /(^|slow-)2g/.test(connection.effectiveType || "")));
@@ -57,6 +58,70 @@
         element.classList.add("aos-init");
         revealObserver.observe(element);
       });
+    }
+  }
+
+  const imageRevealTargets = Array.from(document.querySelectorAll(
+    ".about-card .card-media, .album-item, .invitation-card img, .gift-qr img, .thankyou-body img"
+  ));
+  if (imageRevealTargets.length) {
+    if (disableImageReveal) {
+      imageRevealTargets.forEach((target) => {
+        target.classList.add("image-reveal", "is-visible");
+      });
+    } else {
+      const imageRevealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.16,
+        rootMargin: "0px 0px -6% 0px",
+      });
+
+      imageRevealTargets.forEach((target, index) => {
+        target.classList.add("image-reveal");
+        target.style.setProperty("--image-reveal-delay", `${Math.min(index % 4, 3) * 80}ms`);
+        imageRevealObserver.observe(target);
+      });
+    }
+  }
+
+  const timelineSection = document.getElementById("time-line");
+  const timelineSequenceItems = Array.from(document.querySelectorAll("#time-line .timeline-item"));
+  if (timelineSection && timelineSequenceItems.length) {
+    if (reducedMotionQuery.matches) {
+      timelineSequenceItems.forEach((item) => {
+        item.classList.add("timeline-sequence-item", "is-visible");
+      });
+    } else {
+      timelineSequenceItems.forEach((item, index) => {
+        item.classList.add("timeline-sequence-item");
+        item.style.setProperty("--timeline-sequence-delay", `${index * (mobileQuery.matches ? 140 : 180)}ms`);
+      });
+
+      const timelineObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          timelineSequenceItems.forEach((item) => {
+            item.classList.add("is-visible");
+          });
+          observer.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.18,
+        rootMargin: "0px 0px -10% 0px",
+      });
+
+      timelineObserver.observe(timelineSection);
     }
   }
 

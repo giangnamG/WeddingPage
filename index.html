@@ -523,49 +523,38 @@
         style="background-image:url(); display:block">
         <div class="uk-position-cover uk-overlay uk-overlay-primary"> </div>
         <div class="message-container container uk-position-relative uk-position-z-index">
-            <h2 class="section-title uk-light" style="color:white">
-                Gửi lời chúc đến cặp đôi </h2>
-            <div class="list_message">
-                <div class="message-item ">
-                    <h3 class="user_message">Em Vinh Đông Tà</h3>
-                    <p class="message_body"></p>
-                    <p>Chúc mừng hạnh phúc anh Toàn ạ</p>
-                    <p></p>
+            <div class="wish-form-card">
+                <div class="wish-form-heading">
+                    <span class="wish-form-kicker">Wedding Wishes</span>
+                    <h3 class="form-title">Gửi lời chúc</h3>
+                    <p class="wish-form-description">Một lời nhắn chân thành của bạn sẽ là món quà rất đẹp dành cho
+                        chúng mình.</p>
                 </div>
-                <div class="message-item ">
-                    <h3 class="user_message">Em Mạnh Spiderman</h3>
-                    <p class="message_body"></p>
-                    <p>Anh Toàn ơi, i love you, pặc pặc</p>
-                    <p></p>
-                </div>
-                <div class="message-item ">
-                    <h3 class="user_message">Cần</h3>
-                    <p class="message_body"></p>
-                    <p>Chúc anh hạnh phúc</p>
-                    <p></p>
-                </div>
-            </div>
 
-            <div class="uk-padding-small uk-border-rounded blur-bg" style="border:1px solid white">
-
-                <h3 class="form-title" style="color:white">Gửi lời chúc</h3>
-                <form action="/" id="messageForm" method="POST">
-
+                <form action="/" id="messageForm" method="POST" class="wish-form">
                     <input type="hidden" id="postId" value="595">
-                    <div class="input-group uk-margin-top" style="color:white">
-                        <label for="">
-                            Tên của bạn </label>
-                        <input style="border:1px solid white" id="m_name" type="text" class="input" value=""
-                            required="">
+
+                    <div class="input-group">
+                        <label for="m_name">Tên của bạn</label>
+                        <input id="m_name" type="text" class="input" value="" placeholder="Ví dụ: Minh Anh"
+                            autocomplete="name" required="">
                     </div>
-                    <div class="input-group uk-margin-top">
-                        <label for="" style="color:white">
-                            Lời nhắn gửi </label>
-                        <textarea style="border:1px solid white;" id="m_text" class="input-text" name="" cols="30"
-                            rows="5" required=""></textarea>
+
+                    <div class="input-group">
+                        <label for="m_text">Lời nhắn gửi</label>
+                        <textarea id="m_text" class="input-text" name="" cols="30" rows="5"
+                            placeholder="Hãy gửi tới cô dâu chú rể một lời chúc thật đáng nhớ..."
+                            required=""></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary send_message uk-margin-top" style="color:white">Gửi lời
-                        chúc</button>
+
+                    <div class="wish-form-footer">
+                        <p class="wish-form-note">Cảm ơn bạn đã dành thời gian để lại lời chúc cho ngày đặc biệt này.
+                        </p>
+                        <button type="submit" class="btn btn-primary send_message">
+                            <i class="ri-heart-3-fill"></i>
+                            Gửi lời chúc
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -579,51 +568,76 @@
         <div class="container">
             <form action="/" method="post" id="form-wedding"
                 style="background-image:url(https://static.vecteezy.com/system/resources/previews/016/407/415/original/paper-cut-sweet-pink-envelope-and-heart-with-copy-space-for-design-valentine-s-day-or-love-day-background-concept-send-a-letter-to-a-lover-couple-free-vector.jpg)">
-                <h2 class="section-title">Xác nhận tham dự</h2>
-                <p class="sub-title">Hãy cho chúng tôi biết bạn sẽ đến tham dự nhé!</p>
-                <div class="form-container">
-                    <div class="group-radio">
-
-                        <label class="radio-container">HỘI TRƯỜNG A - NHÀ HÀNG ASEAN <span class="tooltip">
-                                <p>CÔNG VIÊN NHẠC SƠN - P. KIM TÂN - TP. LÀO CAI</p>
-                            </span>
-                            <input type="radio" name="fav_language" id="nha_trai" value="HỘI TRƯỜNG A - NHÀ HÀNG ASEAN">
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
-                    <div class="group-input">
-                        <label>Tên Khách Mời</label>
-                        <input type="text" class="input" id="f_name" required="" placeholder="Tên Khách Mời">
+                <div class="rsvp-form-shell">
+                    <div class="rsvp-form-heading">
+                        <span class="rsvp-kicker">RSVP</span>
+                        <h2 class="section-title">Xác nhận tham dự</h2>
+                        <p class="sub-title">Hãy cho chúng tôi biết bạn sẽ đến tham dự để chúng mình đón tiếp chu đáo
+                            nhất.</p>
                     </div>
 
-                    <div class="group-input">
-                        <p class="group-title"></p>
-                        <div class="group-select">
-                            <select name="" id="wedding-select">
-                                <option value="Có tôi sẽ đến">Có tôi sẽ đến </option>
-                                <option value="Xin Lỗi tôi không tham dự được !">Xin Lỗi tôi không tham dự được !
-                                </option>
-                            </select>
-                            <i class="bx bx-chevron-down"></i>
+                    <div class="form-container rsvp-form-body">
+                        <div class="group-radio rsvp-venue-group">
+                            <label class="radio-container rsvp-venue-card">
+                                <span class="rsvp-venue-badge">Địa điểm tổ chức</span>
+                                <span class="rsvp-venue-name">HỘI TRƯỜNG A - NHÀ HÀNG ASEAN</span>
+                                <span class="rsvp-venue-address">CÔNG VIÊN NHẠC SƠN - P. KIM TÂN - TP. LÀO CAI</span>
+                                <span class="tooltip">
+                                    <p>CÔNG VIÊN NHẠC SƠN - P. KIM TÂN - TP. LÀO CAI</p>
+                                </span>
+                                <input type="radio" name="fav_language" id="nha_trai"
+                                    value="HỘI TRƯỜNG A - NHÀ HÀNG ASEAN">
+                                <span class="checkmark"></span>
+                            </label>
                         </div>
-                        <div class="group-select">
-                            <select name="" id="num_user">
-                                <option value="1 Người">1 Người </option>
-                                <option value="2 Người">2 Người</option>
-                                <option value="3 Người">3 Người</option>
-                            </select>
-                            <i class="bx bx-chevron-down"></i>
-                        </div>
-                    </div>
-                    <div class="group-input">
-                        <label></label>
-                        <textarea name="" id="f_text" cols="30" rows="4">          </textarea>
-                    </div>
-                    <div class="message-form" style="display: none;">
 
-                    </div>
-                    <div class="group-input">
-                        <button type="submit" class="wedding-submit">Xác nhận</button>
+                        <div class="rsvp-form-grid">
+                            <div class="group-input rsvp-field">
+                                <label for="f_name">Tên Khách Mời</label>
+                                <input type="text" class="input" id="f_name" required="" placeholder="Nhập tên của bạn">
+                            </div>
+
+                            <div class="group-input rsvp-field rsvp-select-stack">
+                                <label for="wedding-select">Phản hồi của bạn</label>
+                                <div class="rsvp-select-grid">
+                                    <div class="group-select">
+                                        <select name="" id="wedding-select">
+                                            <option value="Tôi sẽ đến">Tôi sẽ đến </option>
+                                            <option value="Xin Lỗi tôi không tham dự được !">Xin Lỗi tôi không tham dự
+                                                được !
+                                            </option>
+                                        </select>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <div class="group-select">
+                                        <select name="" id="num_user">
+                                            <option value="1 Người">1 Người </option>
+                                            <option value="2 Người">2 Người</option>
+                                            <option value="3 Người">3 Người</option>
+                                        </select>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="group-input rsvp-field rsvp-note-field">
+                                <label for="f_text">Lời nhắn thêm</label>
+                                <textarea name="" id="f_text" cols="30" rows="4"
+                                    placeholder="Nếu bạn muốn nhắn thêm điều gì cho cô dâu chú rể, hãy viết tại đây..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="message-form" style="display: none;">
+
+                        </div>
+
+                        <div class="rsvp-actions">
+                            <p class="rsvp-helper">Sự hiện diện của bạn là món quà quý giá nhất dành cho chúng mình.</p>
+                            <button type="submit" class="wedding-submit">
+                                <i class="ri-mail-check-line"></i>
+                                Xác nhận tham dự
+                            </button>
+                        </div>
                     </div>
                 </div>
 
