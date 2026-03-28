@@ -566,6 +566,8 @@
                             Gửi lời chúc
                         </button>
                     </div>
+
+                    <div class="message-form" style="display:none;"></div>
                 </form>
             </div>
         </div>
@@ -596,7 +598,7 @@
                                 <span class="tooltip">
                                     <p>CÔNG VIÊN NHẠC SƠN - P. KIM TÂN - TP. LÀO CAI</p>
                                 </span>
-                                <input type="radio" name="fav_language" id="nha_trai"
+                                <input type="radio" name="fav_language" id="nha_trai" checked
                                     value="HỘI TRƯỜNG A - NHÀ HÀNG ASEAN">
                                 <span class="checkmark"></span>
                             </label>
@@ -657,49 +659,178 @@
     </section>
 
     <script>
-        //XỬ LÝ FORM
-        $(document).ready(function () {
-            $('.message-form').fadeOut(300)
-            $('#form').on('submit', function (e) {
-                e.preventDefault();
-                f_userName = "Giang Nam - Huệ Anh"
-                f_check = $('input[type="radio"]:checked').val()
-                f_name = $(this).find('#f_name').val()
-                f_numUser = $('#num_user').find('option:selected').val()
-                f_select = $('#wedding-select').find('option:selected').val()
-                f_text = $(this).find('#f_text').val()
-                var form_data = {
-                    'entry.737056527': f_userName,
-                    'entry.642873731': f_check,
-                    'entry.1699210899': f_name,
-                    'entry.369695229': f_numUser,
-                    'entry.1528762541': f_select,
-                    'entry.1679764871': f_text,
-                }
-                $('.wedding-submit[type="submit"]').text('Đang gửi ...')
-                $.ajax({
-                    url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdD9g3WsFXklx1iJ2WTwnaKq7qXDh8fLcOetjSV8GMatzoWaA/formResponse",
-                    type: "POST",
-                    data: form_data,
-                    dataType: "xml",
-                    statusCode: {
-                        0: function () {
-                            mess_form = 'Chúng mình xin chân thành cám ơn !'
-                            $('.message-form').html(mess_form)
-                            $('button[type="submit"]').addClass('success')
-                            $('button[type="submit"]').removeClass('btn_primary')
-                            $('button[type="submit"]').attr('disabled', 'true')
-                            $('button[type="submit"]').text('Đã xác nhận')
-                            $('.message-form').fadeIn(300)
+        // XỬ LÝ FORM
+        document.addEventListener('DOMContentLoaded', function () {
+            const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzRz9uAQTKKKO-vjaZy7vl2oOn_3ZWMDaCC4sI_Xk6KIK0LGhoHSnuBap_XXTqRXKl5gQ/exec';
+            const wishForm = document.getElementById('messageForm');
+            const rsvpForm = document.getElementById('form-wedding');
+            const REQUEST_TIMEOUT_MS = 20000;
+
+            const postToSheet = async (payload) => {
+                const controller = new AbortController();
+                const timeoutId = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+                try {
+                    await fetch(APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'text/plain;charset=utf-8'
                         },
-                        200: function () {
-                            alert('200')
+                        body: JSON.stringify(payload),
+                        signal: controller.signal
+                    });
+                } finally {
+                    window.clearTimeout(timeoutId);
+                }
+            };
+
+            const setFeedback = (element, message) => {
+                if (!element) return;
+                element.textContent = message;
+                element.style.display = 'block';
+            };
+
+            const hideFeedback = (element) => {
+                if (!element) return;
+                element.style.display = 'none';
+                element.textContent = '';
+            };
+
+            const getInputValue = (element) => {
+                return element ? element.value.trim() : '';
+            };
+
+            const getSelectValue = (select) => {
+                if (!select || !select.options || !select.options.length) {
+                    return '';
+                }
+
+                const selectedOption = select.options[select.selectedIndex];
+                if (selectedOption && selectedOption.value) {
+                    return selectedOption.value.trim();
+                }
+
+                const fallbackOption = Array.from(select.options).find((option) => option.value && option.value.trim());
+                return fallbackOption ? fallbackOption.value.trim() : '';
+            };
+
+            const getCheckedRadioValue = (form, selector, fallbackSelector) => {
+                const checked = form.querySelector(selector);
+                if (checked && checked.value) {
+                    return checked.value.trim();
+                }
+
+                const fallback = form.querySelector(fallbackSelector);
+                return fallback && fallback.value ? fallback.value.trim() : '';
+            };
+
+            document.querySelectorAll('.message-form').forEach((element) => {
+                hideFeedback(element);
+            });
+
+            if (wishForm) {
+                wishForm.addEventListener('submit', async function (event) {
+                    event.preventDefault();
+
+                    const button = wishForm.querySelector('.send_message[type="submit"]');
+                    const feedback = wishForm.querySelector('.message-form');
+                    const nameInput = wishForm.querySelector('#m_name');
+                    const messageInput = wishForm.querySelector('#m_text');
+                    const originalText = button ? button.textContent.trim() : 'Gửi lời chúc';
+                    const payload = {
+                        type: 'wish',
+                        name: getInputValue(nameInput),
+                        message: getInputValue(messageInput)
+                    };
+
+                    if (!payload.name || !payload.message) {
+                        setFeedback(feedback, 'Vui lòng nhập đầy đủ tên và lời chúc của bạn.');
+                        return;
+                    }
+
+                    if (button) {
+                        button.disabled = true;
+                        button.textContent = 'Đang gửi ...';
+                    }
+                    hideFeedback(feedback);
+
+                    try {
+                        await postToSheet(payload);
+                        setFeedback(feedback, 'Cảm ơn bạn đã gửi lời chúc cho chúng mình!');
+                        wishForm.reset();
+                        if (button) {
+                            button.textContent = 'Đã gửi';
+                        }
+                    } catch (error) {
+                        setFeedback(feedback, 'Có lỗi khi gửi lời chúc. Bạn vui lòng thử lại giúp chúng mình nhé.');
+                        if (button) {
+                            button.disabled = false;
+                            button.textContent = originalText;
                         }
                     }
-                })
-            })
-            return false;
-        })
+                });
+            }
+
+            if (rsvpForm) {
+                rsvpForm.addEventListener('submit', async function (event) {
+                    event.preventDefault();
+
+                    const button = rsvpForm.querySelector('.wedding-submit[type="submit"]');
+                    const feedback = rsvpForm.querySelector('.message-form');
+                    const nameInput = rsvpForm.querySelector('#f_name');
+                    const attendanceSelect = rsvpForm.querySelector('#wedding-select');
+                    const guestCountSelect = rsvpForm.querySelector('#num_user');
+                    const noteInput = rsvpForm.querySelector('#f_text');
+                    const originalText = button ? button.textContent.trim() : 'Xác nhận tham dự';
+                    const payload = {
+                        type: 'rsvp',
+                        guest_name: getInputValue(nameInput),
+                        attendance: getSelectValue(attendanceSelect),
+                        guest_count: getSelectValue(guestCountSelect),
+                        venue: getCheckedRadioValue(rsvpForm, 'input[type="radio"]:checked', '#nha_trai'),
+                        note: getInputValue(noteInput)
+                    };
+
+                    if (!payload.guest_name) {
+                        setFeedback(feedback, 'Vui lòng nhập tên khách mời trước khi xác nhận.');
+                        return;
+                    }
+
+                    if (!payload.attendance || !payload.guest_count || !payload.venue) {
+                        setFeedback(feedback, 'Thông tin xác nhận chưa đầy đủ. Bạn vui lòng chọn lại phản hồi, số lượng khách và địa điểm.');
+                        return;
+                    }
+
+                    if (button) {
+                        button.disabled = true;
+                        button.textContent = 'Đang gửi ...';
+                    }
+                    hideFeedback(feedback);
+
+                    try {
+                        await postToSheet(payload);
+                        setFeedback(feedback, 'Chúng mình xin chân thành cảm ơn!');
+                        if (button) {
+                            button.classList.add('success');
+                            button.classList.remove('btn_primary');
+                            button.textContent = 'Đã xác nhận';
+                        }
+                        rsvpForm.querySelectorAll('input, textarea, select, button').forEach((field) => {
+                            if (field !== button) {
+                                field.disabled = true;
+                            }
+                        });
+                    } catch (error) {
+                        setFeedback(feedback, 'Có lỗi khi gửi xác nhận. Bạn vui lòng thử lại giúp chúng mình nhé.');
+                        if (button) {
+                            button.disabled = false;
+                            button.textContent = originalText;
+                        }
+                    }
+                });
+            }
+        });
     </script>
     <!-- END FORM XÁC NHẬN -->
 
@@ -772,9 +903,9 @@
     </section>
     <!-- END THANK YOU --><!-- END THANKYOU -->
     <script>
-        $(':root').css('--primary-color', '');
-        $(':root').css('--secondary-color', '');
-        $(':root').css('--bg', '');
+        document.documentElement.style.setProperty('--primary-color', '');
+        document.documentElement.style.setProperty('--secondary-color', '');
+        document.documentElement.style.setProperty('--bg', '');
     </script>
     <!-- AUDIO -->
     <audio
