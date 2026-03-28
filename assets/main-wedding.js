@@ -517,31 +517,83 @@
   const audioToggle = document.querySelector(".toggleAudio");
 
   if (audio && audioToggle) {
-    if (mobileQuery.matches) {
-      audio.preload = "none";
-      audio.removeAttribute("autoplay");
-    }
+    let playbackUnlocked = false;
 
-    audioToggle.addEventListener("click", async () => {
+    const updateAudioIcon = () => {
       const icon = audioToggle.querySelector("i");
-      const isPaused = audio.paused;
-
-      try {
-        if (isPaused) {
-          await audio.play();
-        } else {
-          audio.pause();
-        }
-      } catch (error) {
-        return;
-      }
-
       if (!icon) {
         return;
       }
 
       icon.classList.toggle("ri-volume-up-fill", !audio.paused);
       icon.classList.toggle("ri-volume-mute-fill", audio.paused);
+    };
+
+    const attemptAutoplay = async () => {
+      try {
+        await audio.play();
+        playbackUnlocked = true;
+        updateAudioIcon();
+        return true;
+      } catch (error) {
+        updateAudioIcon();
+        return false;
+      }
+    };
+
+    const unlockOnFirstInteraction = async () => {
+      if (playbackUnlocked || !audio.paused) {
+        return;
+      }
+
+      const started = await attemptAutoplay();
+      if (started) {
+        detachUnlockListeners();
+      }
+    };
+
+    const interactionEvents = ["pointerdown", "touchstart", "keydown", "scroll"];
+    const detachUnlockListeners = () => {
+      interactionEvents.forEach((eventName) => {
+        window.removeEventListener(eventName, unlockOnFirstInteraction, true);
+      });
+    };
+
+    interactionEvents.forEach((eventName) => {
+      window.addEventListener(eventName, unlockOnFirstInteraction, {
+        passive: true,
+        capture: true,
+      });
     });
+
+    audio.addEventListener("play", () => {
+      playbackUnlocked = true;
+      updateAudioIcon();
+    });
+
+    audio.addEventListener("pause", updateAudioIcon);
+
+    attemptAutoplay();
+
+    audioToggle.addEventListener("click", async () => {
+      const isPaused = audio.paused;
+
+      try {
+        if (isPaused) {
+          await audio.play();
+          playbackUnlocked = true;
+          detachUnlockListeners();
+        } else {
+          audio.pause();
+        }
+      } catch (error) {
+        updateAudioIcon();
+        return;
+      }
+
+      updateAudioIcon();
+    });
+
+    updateAudioIcon();
   }
 })();
