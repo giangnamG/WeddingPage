@@ -1,0 +1,25 @@
+{
+  "name": "weddingpage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:images": "node scripts/generate-display-variants.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giangnamG/WeddingPage.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/giangnamG/WeddingPage/issues"
+  },
+  "homepage": "https://github.com/giangnamG/WeddingPage#readme",
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}
