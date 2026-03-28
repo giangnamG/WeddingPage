@@ -6,15 +6,21 @@
   const isConstrainedNetwork = Boolean(connection && (connection.saveData
     || /(^|slow-)2g/.test(connection.effectiveType || "")));
   const overlay = window.weddingLoader;
-  const managedImages = Array.from(document.querySelectorAll("img[data-batch-src]"));
+  const managedImages = Array.from(document.querySelectorAll("img[data-batch-src], img[loading='lazy']"))
+    .filter((img) => !img.classList.contains("banner_top"));
   const INITIAL_BATCH_SIZE = mobileQuery.matches ? 4 : 6;
   const PREFETCH_CONCURRENCY = isConstrainedNetwork ? 1 : (mobileQuery.matches ? 1 : 2);
   const PREFETCH_PAUSE_MS = isConstrainedNetwork ? 1200 : (mobileQuery.matches ? 700 : 320);
+  const HYDRATE_CONCURRENCY = 1;
+  const VISIBILITY_MARGIN = mobileQuery.matches ? 1200 : 1800;
+  const HOT_MARGIN = mobileQuery.matches ? 2200 : 3200;
   const prefetchedUrls = new Set();
   let prefetchInFlight = 0;
+  let hydrateInFlight = 0;
   let initialLoadComplete = false;
   let userBusyUntil = performance.now() + 400;
   let prefetchTimer = null;
+  let hydrateTimer = null;
 
   if (window.Fancybox) {
     Fancybox.bind("[data-fancybox]", {
@@ -52,23 +58,19 @@
   }
 
   document.querySelectorAll("img").forEach((img) => {
-    if (img.dataset.batchSrc) {
+    if (managedImages.includes(img)) {
       return;
     }
 
     if (img.classList.contains("banner_top")) {
       img.loading = "eager";
-      img.decoding = "async";
+      img.decoding = "auto";
       img.fetchPriority = "high";
       return;
     }
 
     if (!img.hasAttribute("loading")) {
       img.loading = "lazy";
-    }
-
-    if (!img.hasAttribute("decoding")) {
-      img.decoding = "async";
     }
 
     if (!img.hasAttribute("fetchpriority")) {
@@ -83,7 +85,22 @@
 
   const markImageReady = (img) => {
     img.dataset.rendered = "true";
+    img.dataset.prefetched = "true";
+    img.loading = "eager";
+    img.decoding = "auto";
     img.classList.add("is-image-ready");
+  };
+
+  const getManagedSrc = (img) => img.dataset.batchSrc || img.currentSrc || img.getAttribute("src") || "";
+
+  const isDeferredSource = (img) => Boolean(img.dataset.batchSrc);
+
+  const warmDecode = (img) => {
+    if (!img || typeof img.decode !== "function") {
+      return Promise.resolve();
+    }
+
+    return img.decode().catch(() => {});
   };
 
   const applyImageSource = (img) => new Promise((resolve) => {
@@ -92,7 +109,17 @@
       return;
     }
 
+    const src = getManagedSrc(img);
+    if (!src) {
+      markImageReady(img);
+      resolve(img);
+      return;
+    }
+
     img.dataset.rendering = "true";
+    img.loading = "eager";
+    img.decoding = "auto";
+    img.setAttribute("fetchpriority", img.dataset.priority || "low");
 
     const finalize = () => {
       delete img.dataset.rendering;
@@ -105,15 +132,9 @@
       img.removeEventListener("error", handleError);
     };
 
-    const handleLoad = async () => {
+    const handleLoad = () => {
       cleanup();
-      try {
-        if (typeof img.decode === "function") {
-          await img.decode();
-        }
-      } catch (error) {
-      }
-      finalize();
+      warmDecode(img).finally(finalize);
     };
 
     const handleError = () => {
@@ -124,8 +145,9 @@
     img.addEventListener("load", handleLoad, { once: true });
     img.addEventListener("error", handleError, { once: true });
 
-    img.src = img.dataset.batchSrc;
-    img.setAttribute("fetchpriority", img.dataset.priority || "low");
+    if (isDeferredSource(img) && img.getAttribute("src") !== src) {
+      img.src = src;
+    }
 
     if (img.complete && img.naturalWidth > 0) {
       handleLoad();
@@ -135,6 +157,10 @@
   const renderIfNeeded = (img) => {
     if (!img || img.dataset.rendered === "true" || img.dataset.rendering === "true") {
       return Promise.resolve(img);
+    }
+
+    if (isNearViewport(img, VISIBILITY_MARGIN)) {
+      img.dataset.priority = "high";
     }
 
     return applyImageSource(img);
@@ -151,8 +177,15 @@
       return;
     }
 
-    const src = img.dataset.batchSrc;
+    const src = getManagedSrc(img);
     if (!src || prefetchedUrls.has(src)) {
+      img.dataset.prefetched = "true";
+      resolve(img);
+      return;
+    }
+
+    if (!isDeferredSource(img) && img.complete && img.naturalWidth > 0) {
+      prefetchedUrls.add(src);
       img.dataset.prefetched = "true";
       resolve(img);
       return;
@@ -206,6 +239,17 @@
     }, delay);
   };
 
+  const scheduleHydratePump = (delay = 0) => {
+    if (hydrateTimer !== null) {
+      window.clearTimeout(hydrateTimer);
+    }
+
+    hydrateTimer = window.setTimeout(() => {
+      hydrateTimer = null;
+      pumpHydrateQueue();
+    }, delay);
+  };
+
   const pumpPrefetchQueue = () => {
     if (prefetchInFlight >= PREFETCH_CONCURRENCY) {
       return;
@@ -235,12 +279,66 @@
           if (isNearViewport(nextImage)) {
             renderIfNeeded(nextImage);
           }
+          scheduleHydratePump(mobileQuery.matches ? 120 : 80);
           schedulePrefetchPump(mobileQuery.matches ? 180 : 90);
         });
     });
   };
 
-  const initialImages = managedImages.slice(0, INITIAL_BATCH_SIZE);
+  const getHydrateCandidate = () => {
+    const nearbyCandidate = managedImages.find((img) =>
+      img.dataset.prefetched === "true"
+      && img.dataset.rendered !== "true"
+      && img.dataset.rendering !== "true"
+      && isNearViewport(img, HOT_MARGIN));
+
+    if (nearbyCandidate) {
+      return nearbyCandidate;
+    }
+
+    return managedImages.find((img) =>
+      img.dataset.prefetched === "true"
+      && img.dataset.rendered !== "true"
+      && img.dataset.rendering !== "true");
+  };
+
+  const pumpHydrateQueue = () => {
+    if (!initialLoadComplete || hydrateInFlight >= HYDRATE_CONCURRENCY) {
+      return;
+    }
+
+    const remainingBusyTime = userBusyUntil - performance.now();
+    if (remainingBusyTime > 0) {
+      scheduleHydratePump(remainingBusyTime + 60);
+      return;
+    }
+
+    const nextImage = getHydrateCandidate();
+    if (!nextImage) {
+      return;
+    }
+
+    hydrateInFlight += 1;
+
+    scheduleIdleTask(() => {
+      nextImage.dataset.priority = "low";
+      applyImageSource(nextImage)
+        .finally(() => {
+          hydrateInFlight -= 1;
+          scheduleHydratePump(mobileQuery.matches ? 260 : 120);
+        });
+    });
+  };
+
+  const initialImages = managedImages
+    .filter((img) => isNearViewport(img, mobileQuery.matches ? 720 : 920))
+    .slice(0, INITIAL_BATCH_SIZE);
+
+  if (!initialImages.length) {
+    managedImages.slice(0, INITIAL_BATCH_SIZE).forEach((img) => {
+      initialImages.push(img);
+    });
+  }
 
   const loadInitialImages = () => {
     if (!initialImages.length) {
@@ -262,14 +360,17 @@
         for (let index = 0; index < PREFETCH_CONCURRENCY; index += 1) {
           pumpPrefetchQueue();
         }
+        scheduleHydratePump(PREFETCH_PAUSE_MS);
       });
   };
 
   if (managedImages.length) {
     managedImages.forEach((img) => {
-      img.loading = "eager";
-      img.decoding = "async";
-      img.setAttribute("fetchpriority", "low");
+      img.dataset.priority = img.dataset.priority || "low";
+      img.decoding = "auto";
+      if (!img.hasAttribute("fetchpriority")) {
+        img.setAttribute("fetchpriority", "low");
+      }
     });
 
     loadInitialImages();
@@ -286,11 +387,15 @@
           }
 
           markUserBusy();
+          entry.target.loading = "eager";
+          entry.target.decoding = "auto";
+          entry.target.dataset.priority = "high";
           renderIfNeeded(entry.target);
           schedulePrefetchPump(PREFETCH_PAUSE_MS);
+          scheduleHydratePump(mobileQuery.matches ? 90 : 60);
         });
       }, {
-        rootMargin: "420px 0px",
+        rootMargin: `${VISIBILITY_MARGIN}px 0px`,
       });
 
       managedImages.forEach((img) => visibilityObserver.observe(img));
@@ -302,6 +407,7 @@
     window.addEventListener("resize", () => {
       markUserBusy();
       schedulePrefetchPump(PREFETCH_PAUSE_MS);
+      scheduleHydratePump(PREFETCH_PAUSE_MS);
     }, { passive: true });
   } else {
     overlay?.hide();
