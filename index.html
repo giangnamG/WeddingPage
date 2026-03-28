@@ -13,7 +13,6 @@
     <link data-minify="1" rel="stylesheet" id="remixicon-css" href="./assets/remixicon.css" media="all">
     <link data-minify="1" rel="stylesheet" id="boxicon-css" href="./assets/boxicons.min.css" media="all">
     <link data-minify="1" rel="stylesheet" id="fancybox-css" href="./assets/fancybox.css" media="all">
-    <link data-minify="1" rel="stylesheet" id="swiper slide-css" href="./assets/swiper-bundle.min.css" media="all">
     <link data-minify="1" rel="stylesheet" id="animation-css" href="./assets/animation.css" media="all">
     <link data-minify="1" rel="stylesheet" id="aos style-css" href="./assets/aos.css" media="all">
     <link data-minify="1" rel="stylesheet" id="footer style-css" href="./assets/footer.css" media="all">
@@ -22,7 +21,6 @@
     <script src="./assets/jquery.min.js" id="jquery-core-js"></script>
     <style type="text/css" id="operaUserStyle"></style>
     <script src="./assets/jquery-migrate.min.js" id="jquery-migrate-js"></script>
-    <script src="./assets/jquery.min(1).js" id="Jquery-js"></script>
     <link data-minify="1" rel="stylesheet" href="./assets/style.css">
 </head>
 
@@ -30,20 +28,11 @@
     class="wp-singular thiepcuoi-template thiepcuoi-template-templates thiepcuoi-template-nhenhang thiepcuoi-template-templatesnhenhang-php single single-thiepcuoi postid-595 wp-theme-wedding-studio"
     style="overflow-y: scroll;" data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">
 
-    <!-- PRELOAD -->
-    <div class="loader uk-overlay uk-position-cover uk-position-fixed uk-background-muted uk-position-z-index uk-flex uk-flex-center uk-flex-middle"
-        style="z-index: 999; display: none;">
-        <div class="loader-logo uk-text-center">
-            <img width="1132" height="1131" src="./assets/logo-HL.webp" alt="" style="max-height: 200px">
-            <p class="tracking-in-expand text-primary title-font uk-h1">Thiệp Cưới Hoàng Linh</p>
-        </div>
-
-    </div>
     <!-- END PRELOAD --> <!-- HEADER -->
     <header>
         <section id="banner">
             <img width="2560" height="1707" src="./assets/0S0A3720.webp" alt="" class="banner_top kenburns-top"
-                style="object-position:center center">
+                fetchpriority="high" decoding="async" loading="eager" style="object-position:center center">
             <div class="banner-container container flex-center-center">
                 <div class="banner-card flex-center-center">
 
@@ -104,7 +93,8 @@
                 <div class="about-card aos-init aos-animate" data-aos="fade-left" data-aos-duration="3000"
                     style="order:1">
                     <div class="card-media">
-                        <img width="1267" height="1900" src="./webp/AN_09583.webp" alt="" class="groom_img">
+                        <img width="1267" height="1900" src="./webp/AN_09583.webp" alt="" class="groom_img"
+                            loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <div class="card-body">
                         <h3 class="groom_name">Giang Nam</h3>
@@ -118,7 +108,8 @@
                 <div class="about-card aos-init aos-animate" data-aos="fade-right" data-aos-duration="3000"
                     style="order:2">
                     <div class="card-media">
-                        <img width="2560" height="1706" src="./webp/AN_08326.webp" alt="" class="bride_img">
+                        <img width="2560" height="1706" src="./webp/AN_08326.webp" alt="" class="bride_img"
+                            loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <div class="card-body">
                         <h3 class="bride_name">Huệ Anh</h3>
@@ -137,8 +128,9 @@
         <div class="container">
             <!-- COUNTDOWN -->
 
-            <div class="count-down section-countdown img_bg bg_overlay"
-                style="background-image:url(./assets/0S0A3720.webp)">
+            <div class="count-down section-countdown bg_overlay deferred-media">
+                <img width="2560" height="1707" src="./assets/0S0A3720.webp" alt="" class="section-bg-media"
+                    loading="lazy" decoding="async" fetchpriority="low">
                 <p class="subtitle">CÙNG ĐẾM NGƯỢC THỜI GIAN</p>
                 <h2 class="section-title">
                     SAVE THE DATE </h2>
@@ -188,10 +180,10 @@
                     TỚI DỰ BỮA CƠM THÂN MẬT CHUNG VUI CÙNG GIA ĐÌNH CHÚNG TÔI</p>
                 <div class="invitation-container">
                     <div class="invitation-card text-black"> <img width="1267" height="1900" src="./webp/AN_08978.webp"
-                            alt="">
+                            alt="" loading="lazy" decoding="async" fetchpriority="low">
                         <h3 class="card-title text-black">HỘI TRƯỜNG A - NHÀ HÀNG ASEAN</h3>
                         <address>
-                            <p>CÔNG VIÊN NHẬT SƠN - P. KIM TÂN - TP. LÀO CAI</p>
+                            <p>CÔNG VIÊN NHẠC SƠN - P. KIM TÂN - TP. LÀO CAI</p>
                         </address>
                         <div class="invitation-body text-black">
                             <div class="invi_time">
@@ -248,7 +240,8 @@
             <div class="timeline-list">
                 <div class="timeline-item aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
                     <div class="timeline-media">
-                        <img width="1267" height="1900" src="./webp/AN_08453.webp" alt="" class="timline-img">
+                        <img width="1267" height="1900" src="./webp/AN_08453.webp" alt="" class="timline-img"
+                            loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <div class="timeline-body">
                         <span class="story-date">10/05/2023</span>
@@ -258,7 +251,8 @@
                 </div>
                 <div class="timeline-item aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
                     <div class="timeline-media">
-                        <img width="1267" height="1900" src="./webp/AN_08621.webp" alt="" class="timline-img">
+                        <img width="1267" height="1900" src="./webp/AN_08621.webp" alt="" class="timline-img"
+                            loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <div class="timeline-body">
                         <span class="story-date">07/02/2026</span>
@@ -268,7 +262,8 @@
                 </div>
                 <div class="timeline-item aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
                     <div class="timeline-media">
-                        <img width="1267" height="1900" src="./webp/AN_08735.webp" alt="" class="timline-img">
+                        <img width="1267" height="1900" src="./webp/AN_08735.webp" alt="" class="timline-img"
+                            loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <div class="timeline-body">
                         <span class="story-date">04/04/2026</span>
@@ -278,7 +273,8 @@
                 </div>
                 <div class="timeline-item aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
                     <div class="timeline-media">
-                        <img width="1267" height="1900" src="./webp/AN_08942.webp" alt="" class="timline-img">
+                        <img width="1267" height="1900" src="./webp/AN_08942.webp" alt="" class="timline-img"
+                            loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <div class="timeline-body">
                         <span class="story-date">1/6/2025</span>
@@ -301,152 +297,182 @@
         <div class="album container">
             <div class="album-item">
                 <a data-fancybox="gallery" href="./webp/AN_00356.webp">
-                    <img width="1267" height="1900" src="./webp/AN_00356.webp" alt="">
+                    <img width="1267" height="1900" src="./webp/AN_00356.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
                 <a data-fancybox="gallery" href="./webp/AN_00457.webp">
-                    <img width="1267" height="1900" src="./webp/AN_00457.webp" alt="">
+                    <img width="1267" height="1900" src="./webp/AN_00457.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
                 <a data-fancybox="gallery" href="./webp/AN_00356.webp">
-                    <img width="1267" height="1900" src="./webp/AN_00356.webp" alt="">
+                    <img width="1267" height="1900" src="./webp/AN_00356.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
                 <a data-fancybox="gallery" href="./webp/AN_08453.webp">
-                    <img width="1267" height="1900" src="./webp/AN_08453.webp" alt="">
+                    <img width="1267" height="1900" src="./webp/AN_08453.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
                 <a data-fancybox="gallery" href="./webp/AN_00318.webp">
-                    <img width="1267" height="1900" src="./webp/AN_00318.webp" alt="">
+                    <img width="1267" height="1900" src="./webp/AN_00318.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
                 <a data-fancybox="gallery" href="./webp/AN_00286.webp">
-                    <img width="2560" height="1707" src="./webp/AN_00286.webp" alt="">
+                    <img width="2560" height="1707" src="./webp/AN_00286.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
-                <a data-fancybox="gallery" href="./assets/0S0A3944.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3944.webp" alt="">
+                <a data-fancybox="gallery" href="./webp/AN_09446.webp">
+                    <img width="1267" height="1900" src="./webp/AN_09446.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
-                <a data-fancybox="gallery" href="./assets/0S0A3933.webp">
-                    <img width="2560" height="1707" src="./assets/0S0A3933.webp" alt="">
+                <a data-fancybox="gallery" href="./webp/AN_09476.webp">
+                    <img width="1267" height="1900" src="./webp/AN_09476.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
-                <a data-fancybox="gallery" href="./assets/0S0A3915.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3915.webp" alt="">
+                <a data-fancybox="gallery" href="./webp/AN_09456.webp">
+                    <img width="2560" height="1707" src="./webp/AN_09456.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
-                <a data-fancybox="gallery" href="./assets/0S0A3907.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3907.webp" alt="">
+                <a data-fancybox="gallery" href="./webp/AN_08735.webp">
+                    <img width="1267" height="1900" src="./webp/AN_08735.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
-                <a data-fancybox="gallery" href="./assets/0S0A3904.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3904.webp" alt="">
+                <a data-fancybox="gallery" href="./webp/AN_08637.webp">
+                    <img width="1267" height="1900" src="./webp/AN_08637.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
-                <a data-fancybox="gallery" href="./assets/0S0A3903.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3903.webp" alt="">
+                <a data-fancybox="gallery" href="./webp/AN_08756.webp">
+                    <img width="1267" height="1900" src="./webp/AN_08756.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
-                <a data-fancybox="gallery" href="./assets/0S0A3885.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3885.webp" alt="">
+                <a data-fancybox="gallery" href="./webp/AN_00079.webp">
+                    <img width="1267" height="1900" src="./webp/AN_00079.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
-                <a data-fancybox="gallery" href="./assets/0S0A3883.webp">
-                    <img width="2560" height="1707" src="./assets/0S0A3883.webp" alt="">
+                <a data-fancybox="gallery" href="./webp/AN_09943.webp">
+                    <img width="2560" height="1707" src="./webp/AN_09943.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
-                <a data-fancybox="gallery" href="./assets/0S0A3865.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3865.webp" alt="">
+                <a data-fancybox="gallery" href="./webp/AN_00092.webp">
+                    <img width="1267" height="1900" src="./webp/AN_00092.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
-                <a data-fancybox="gallery" href="./assets/0S0A3813.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3813.webp" alt="">
+                <a data-fancybox="gallery" href="./webp/AN_08978.webp">
+                    <img width="1267" height="1900" src="./webp/AN_08978.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
-                <a data-fancybox="gallery" href="./assets/0S0A3811.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3811.webp" alt="">
+                <a data-fancybox="gallery" href="./webp/AN_08942.webp">
+                    <img width="1267" height="1900" src="./webp/AN_08942.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
-                <a data-fancybox="gallery" href="./assets/0S0A3799.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3799.webp" alt="">
+                <a data-fancybox="gallery" href="./webp/AN_08987.webp">
+                    <img width="1267" height="1900" src="./webp/AN_08987.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
-                <a data-fancybox="gallery" href="./assets/0S0A3783.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3783.webp" alt="">
+                <a data-fancybox="gallery" href="./webp/AN_09937.webp">
+                    <img width="1267" height="1900" src="./webp/AN_09937.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
-                <a data-fancybox="gallery" href="./assets/0S0A3781.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3781.webp" alt="">
+                <a data-fancybox="gallery" href="./webp/AN_09698.webp">
+                    <img width="1267" height="1900" src="./webp/AN_09698.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
-                <a data-fancybox="gallery" href="./assets/0S0A3775.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3775.webp" alt="">
+                <a data-fancybox="gallery" href="./webp/AN_00024.webp">
+                    <img width="1267" height="1900" src="./webp/AN_00024.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
                 <a data-fancybox="gallery" href="./assets/0S0A3766.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3766.webp" alt="">
+                    <img width="1267" height="1900" src="./assets/0S0A3766.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
                 <a data-fancybox="gallery" href="./assets/0S0A3723.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3723.webp" alt="">
+                    <img width="1267" height="1900" src="./assets/0S0A3723.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
                 <a data-fancybox="gallery" href="./assets/0S0A3720.webp">
-                    <img width="2560" height="1707" src="./assets/0S0A3720.webp" alt="">
+                    <img width="2560" height="1707" src="./assets/0S0A3720.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
                 <a data-fancybox="gallery" href="./assets/0S0A3719.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3719.webp" alt="">
+                    <img width="1267" height="1900" src="./assets/0S0A3719.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
                 <a data-fancybox="gallery" href="./assets/0S0A3691s.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3691s.webp" alt="">
+                    <img width="1267" height="1900" src="./assets/0S0A3691s.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
                 <a data-fancybox="gallery" href="./assets/0S0A3676.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3676.webp" alt="">
+                    <img width="1267" height="1900" src="./assets/0S0A3676.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
                 <a data-fancybox="gallery" href="./assets/0S0A3742.webp">
-                    <img width="1267" height="1900" src="./assets/0S0A3742.webp" alt="">
+                    <img width="1267" height="1900" src="./assets/0S0A3742.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
                 <a data-fancybox="gallery" href="./assets/0S0A3667.webp">
-                    <img width="1266" height="1900" src="./assets/0S0A3667.webp" alt="">
+                    <img width="1266" height="1900" src="./assets/0S0A3667.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
             <div class="album-item">
                 <a data-fancybox="gallery" href="./assets/0S0A3651.webp">
-                    <img width="2560" height="1706" src="./assets/0S0A3651.webp" alt="">
+                    <img width="2560" height="1706" src="./assets/0S0A3651.webp" alt="" loading="lazy" decoding="async"
+                        fetchpriority="low">
                 </a>
             </div>
         </div>
@@ -673,7 +699,8 @@
                     <div class="gift-card">
                         <div class="gift-qr">
                             <img width="871" height="1884" src="./assets/1545d305-c20d-4811-a686-99d1ff177040.webp"
-                                alt="" class="groom_qr" style="max-width:100%">
+                                alt="" class="groom_qr" style="max-width:100%" loading="lazy" decoding="async"
+                                fetchpriority="low">
                         </div>
                         <div class="gift-body">
                             <p>Gửi Quà Cho Chú Rể</p>
@@ -694,7 +721,7 @@
     <section id="thankyou" class="section-thankyou bg_overlay uk-position-z-index">
         <div class="uk-overlay uk-overlay-primary uk-position-cover"> </div>
         <img width="2560" height="1707" src="./assets/0S0A3720.webp" alt="" class="thankyou-bg thankyou_img"
-            style="object-position:">
+            loading="lazy" decoding="async" fetchpriority="low" style="object-position:">
         <div class="thankyou-body container uk-position-relative uk-position-z-index">
             <h2 class="script-font uk-heading-medium uk-text-center text-white aos-init" data-aos="fade-up"
                 data-aos-duration="2000">Thank You!</h2>
@@ -728,7 +755,7 @@
     <!-- AUDIO -->
     <audio
         src="https://thiepcuoihoanglinh.com/wp-content/uploads/2025/05/Christina-Perri-A-Thousand-Years-yt.savetube.me_-2.mp3"
-        controls="" autoplay="" id="audio">
+        controls="" preload="none" id="audio">
 
     </audio>
     <!-- END AUDIO --> <!-- FOOTER -->
@@ -773,8 +800,6 @@
     <script data-minify="1" src="./assets/preload.js" id="preload js-js"></script>
     <script data-minify="1" src="./assets/aos.js" id="aos js-js"></script>
     <script data-minify="1" src="./assets/fancybox.umd.js" id="fancybox js-js"></script>
-    <script data-minify="1" src="./assets/swiper-bundle.min.js" id="swiper slide-js"></script>
-    <script data-minify="1" src="./assets/scrollreveal.min.js" id="scrollrevea-js"></script>
     <script data-minify="1" src="./assets/main-wedding.js" id="main wedding-js"></script>
     <script>
         (function () {
@@ -817,6 +842,9 @@
         (function () {
             const sections = Array.from(document.querySelectorAll('section'));
             if (!sections.length) return;
+            const disableSectionAnimation = window.matchMedia('(max-width: 767px)').matches
+                || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (disableSectionAnimation) return;
 
             sections.forEach((section, index) => {
                 section.classList.add('section-animate');

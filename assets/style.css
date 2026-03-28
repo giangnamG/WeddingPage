@@ -13,3 +13,30 @@
 section.section-animate{opacity:0;transform:translateY(16px);transition:opacity 1.1s cubic-bezier(.22,.61,.36,1),transform 1.1s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
 section.section-animate.is-visible{opacity:1;transform:translateY(0)}
 @media (prefers-reduced-motion: reduce){section.section-animate{opacity:1;transform:none;transition:none}}
+.loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility .25s ease}
+.overlay-active{overflow:hidden!important}
+.loader{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(241,235,228,.92)!important}
+.loader.loader-soft{inset:auto 0 16px 0!important;top:auto!important;bottom:16px!important;background:transparent!important;backdrop-filter:none;-webkit-backdrop-filter:none;pointer-events:none}
+.loader.loader-soft .loader-logo{padding:12px 18px;border-radius:999px;background:rgba(255,255,255,.94);box-shadow:0 12px 26px rgba(0,0,0,.12)}
+.loader.loader-soft .loader-logo img,.loader.loader-soft .tracking-in-expand{display:none}
+.loader-logo{display:grid;justify-items:center;gap:12px;padding:28px 32px;border-radius:24px;background:rgba(255,255,255,.72);box-shadow:0 24px 60px rgba(0,0,0,.14)}
+.loader-status{font-size:14px;color:var(--primary-color);font-weight:600;letter-spacing:.02em}
+.deferred-media{position:relative;overflow:hidden;isolation:isolate}
+.deferred-media>.section-bg-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.deferred-media>*:not(.section-bg-media){position:relative;z-index:1}
+img{display:block}
+img[data-batch-src]{background:linear-gradient(135deg,rgba(191,147,118,.12),rgba(255,255,255,.3))}
+img.is-image-ready{transition:none}
+#about,#countdown-section,#time-line,#album,#message,#form,#gift,#thankyou{content-visibility:auto;contain-intrinsic-size:1px 900px}
+.album-item,.timeline-item,.message-item,.gift-card{content-visibility:auto;contain-intrinsic-size:1px 320px}
+@media (max-width:767px){
+  .img_bg{background-attachment:scroll}
+  .kenburns-top,.heartbeat{animation:none!important;-webkit-animation:none!important;transform:none!important}
+  [data-aos]{transition:none!important;transform:none!important}
+  .blur-bg,.card-body{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .section-jump-toggle{box-shadow:0 6px 16px rgba(0,0,0,.14)}
+  section.section-animate{opacity:1!important;transform:none!important;transition:none!important;will-change:auto}
+  #about,#countdown-section,#time-line,#album,#message,#form,#gift,#thankyou,.album-item,.timeline-item,.message-item,.gift-card{content-visibility:visible;contain-intrinsic-size:auto}
+  .loader.loader-soft{bottom:10px!important}
+  .loader-status{font-size:13px}
+}
