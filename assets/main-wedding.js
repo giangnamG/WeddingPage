@@ -8,15 +8,18 @@
   const overlay = window.weddingLoader;
   const managedImages = Array.from(document.querySelectorAll("img[data-batch-src], img[loading='lazy'], img[data-persistent-image='true']"))
     .filter((img) => !img.classList.contains("banner_top"));
+  const persistentImages = managedImages.filter((img) => img.dataset.persistentImage === "true");
   const INITIAL_BATCH_SIZE = mobileQuery.matches ? 4 : 6;
   const PREFETCH_CONCURRENCY = isConstrainedNetwork ? 1 : (mobileQuery.matches ? 1 : 2);
   const PREFETCH_PAUSE_MS = isConstrainedNetwork ? 1200 : (mobileQuery.matches ? 700 : 320);
   const HYDRATE_CONCURRENCY = 1;
+  const PERSISTENT_WARM_CONCURRENCY = mobileQuery.matches ? 2 : 3;
   const VISIBILITY_MARGIN = mobileQuery.matches ? 1200 : 1800;
   const HOT_MARGIN = mobileQuery.matches ? 2200 : 3200;
   const prefetchedUrls = new Set();
   let prefetchInFlight = 0;
   let hydrateInFlight = 0;
+  let persistentWarmInFlight = 0;
   let initialLoadComplete = false;
   let userBusyUntil = performance.now() + 400;
   let prefetchTimer = null;
@@ -250,6 +253,32 @@
     }, delay);
   };
 
+  const getPersistentWarmCandidate = () => persistentImages.find((img) =>
+    img.dataset.rendered !== "true"
+    && img.dataset.rendering !== "true");
+
+  const pumpPersistentWarmQueue = () => {
+    if (!initialLoadComplete || persistentWarmInFlight >= PERSISTENT_WARM_CONCURRENCY) {
+      return;
+    }
+
+    const nextImage = getPersistentWarmCandidate();
+    if (!nextImage) {
+      return;
+    }
+
+    persistentWarmInFlight += 1;
+
+    scheduleIdleTask(() => {
+      nextImage.dataset.priority = "low";
+      applyImageSource(nextImage)
+        .finally(() => {
+          persistentWarmInFlight -= 1;
+          pumpPersistentWarmQueue();
+        });
+    });
+  };
+
   const pumpPrefetchQueue = () => {
     if (prefetchInFlight >= PREFETCH_CONCURRENCY) {
       return;
@@ -357,6 +386,9 @@
       .finally(() => {
         initialLoadComplete = true;
         overlay?.hide();
+        for (let index = 0; index < PERSISTENT_WARM_CONCURRENCY; index += 1) {
+          pumpPersistentWarmQueue();
+        }
         for (let index = 0; index < PREFETCH_CONCURRENCY; index += 1) {
           pumpPrefetchQueue();
         }
