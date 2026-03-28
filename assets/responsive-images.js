@@ -93,6 +93,14 @@
 
     img.dataset.originalSrc = originalSrc;
     img.dataset.responsiveRole = role;
+    if (entry.placeholder) {
+      img.dataset.placeholderSrc = entry.placeholder;
+      img.classList.add("has-image-placeholder");
+      img.style.backgroundImage = `url("${entry.placeholder}")`;
+      img.style.backgroundSize = "cover";
+      img.style.backgroundPosition = "center";
+      img.style.backgroundRepeat = "no-repeat";
+    }
     img.setAttribute("srcset", entry.sources.map((source) => `${source.url} ${source.width}w`).join(", "));
     img.setAttribute("sizes", getSizes(img, entry));
 

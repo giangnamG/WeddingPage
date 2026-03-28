@@ -2,6 +2,7 @@ window.responsiveImageManifest = {
   "./webp/AN_08516.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_08516-tiny.webp",
     "sources": [
       {
         "width": 640,
@@ -24,6 +25,7 @@ window.responsiveImageManifest = {
   "./webp/AN_09583.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_09583-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -46,6 +48,7 @@ window.responsiveImageManifest = {
   "./webp/AN_08326.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_08326-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -68,6 +71,7 @@ window.responsiveImageManifest = {
   "./webp/AN_09356.JPG": {
     "aspectRatio": 1.5,
     "orientation": "landscape",
+    "placeholder": "./webp/responsive/AN_09356-tiny.webp",
     "sources": [
       {
         "width": 480,
@@ -90,6 +94,7 @@ window.responsiveImageManifest = {
   "./webp/AN_08453.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_08453-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -112,6 +117,7 @@ window.responsiveImageManifest = {
   "./webp/AN_08621.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_08621-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -134,6 +140,7 @@ window.responsiveImageManifest = {
   "./webp/AN_08735.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_08735-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -156,6 +163,7 @@ window.responsiveImageManifest = {
   "./webp/AN_08942.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_08942-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -178,6 +186,7 @@ window.responsiveImageManifest = {
   "./webp/DUC_3026.JPG": {
     "aspectRatio": 1.5,
     "orientation": "landscape",
+    "placeholder": "./webp/responsive/DUC_3026-tiny.webp",
     "sources": [
       {
         "width": 480,
@@ -200,6 +209,7 @@ window.responsiveImageManifest = {
   "./webp/DUC_3608.JPG": {
     "aspectRatio": 1.5,
     "orientation": "landscape",
+    "placeholder": "./webp/responsive/DUC_3608-tiny.webp",
     "sources": [
       {
         "width": 480,
@@ -222,6 +232,7 @@ window.responsiveImageManifest = {
   "./webp/DUC_3675.JPG": {
     "aspectRatio": 1.5,
     "orientation": "landscape",
+    "placeholder": "./webp/responsive/DUC_3675-tiny.webp",
     "sources": [
       {
         "width": 480,
@@ -244,6 +255,7 @@ window.responsiveImageManifest = {
   "./webp/DUC_3772.JPG": {
     "aspectRatio": 1.5,
     "orientation": "landscape",
+    "placeholder": "./webp/responsive/DUC_3772-tiny.webp",
     "sources": [
       {
         "width": 480,
@@ -266,6 +278,7 @@ window.responsiveImageManifest = {
   "./webp/DUC_3552.JPG": {
     "aspectRatio": 1.5,
     "orientation": "landscape",
+    "placeholder": "./webp/responsive/DUC_3552-tiny.webp",
     "sources": [
       {
         "width": 480,
@@ -288,6 +301,7 @@ window.responsiveImageManifest = {
   "./webp/DUC_3573.JPG": {
     "aspectRatio": 1.5,
     "orientation": "landscape",
+    "placeholder": "./webp/responsive/DUC_3573-tiny.webp",
     "sources": [
       {
         "width": 480,
@@ -310,6 +324,7 @@ window.responsiveImageManifest = {
   "./webp/DUC_3620.JPG": {
     "aspectRatio": 1.5,
     "orientation": "landscape",
+    "placeholder": "./webp/responsive/DUC_3620-tiny.webp",
     "sources": [
       {
         "width": 480,
@@ -332,6 +347,7 @@ window.responsiveImageManifest = {
   "./webp/DUC_3649.JPG": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/DUC_3649-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -354,6 +370,7 @@ window.responsiveImageManifest = {
   "./webp/DUC_3795.JPG": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/DUC_3795-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -376,6 +393,7 @@ window.responsiveImageManifest = {
   "./webp/AN_00356.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_00356-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -398,6 +416,7 @@ window.responsiveImageManifest = {
   "./webp/AN_00457.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_00457-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -420,6 +439,7 @@ window.responsiveImageManifest = {
   "./webp/AN_XXXX.jpg": {
     "aspectRatio": 0.6664,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_XXXX-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -438,6 +458,7 @@ window.responsiveImageManifest = {
   "./webp/AN_00318.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_00318-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -460,6 +481,7 @@ window.responsiveImageManifest = {
   "./webp/AN_00286.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_00286-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -482,6 +504,7 @@ window.responsiveImageManifest = {
   "./webp/AN_09446.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_09446-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -504,6 +527,7 @@ window.responsiveImageManifest = {
   "./webp/AN_09476.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_09476-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -526,6 +550,7 @@ window.responsiveImageManifest = {
   "./webp/AN_09456.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_09456-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -548,6 +573,7 @@ window.responsiveImageManifest = {
   "./webp/AN_08637.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_08637-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -570,6 +596,7 @@ window.responsiveImageManifest = {
   "./webp/AN_08756.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_08756-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -592,6 +619,7 @@ window.responsiveImageManifest = {
   "./webp/AN_00079.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_00079-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -614,6 +642,7 @@ window.responsiveImageManifest = {
   "./webp/AN_09943.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_09943-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -636,6 +665,7 @@ window.responsiveImageManifest = {
   "./webp/AN_00092.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_00092-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -658,6 +688,7 @@ window.responsiveImageManifest = {
   "./webp/AN_08978.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_08978-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -680,6 +711,7 @@ window.responsiveImageManifest = {
   "./webp/AN_08987.webp": {
     "aspectRatio": 1.5,
     "orientation": "landscape",
+    "placeholder": "./webp/responsive/AN_08987-tiny.webp",
     "sources": [
       {
         "width": 480,
@@ -702,6 +734,7 @@ window.responsiveImageManifest = {
   "./webp/AN_09937.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_09937-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -724,6 +757,7 @@ window.responsiveImageManifest = {
   "./webp/AN_09698.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_09698-tiny.webp",
     "sources": [
       {
         "width": 320,
@@ -746,6 +780,7 @@ window.responsiveImageManifest = {
   "./webp/AN_00024.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_00024-tiny.webp",
     "sources": [
       {
         "width": 320,

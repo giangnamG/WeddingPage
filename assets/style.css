@@ -25,6 +25,7 @@ section.section-animate.is-visible{opacity:1;transform:translateY(0)}
 .deferred-media>.section-bg-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .deferred-media>*:not(.section-bg-media){position:relative;z-index:1}
 img{display:block}
+img.has-image-placeholder{background-color:rgba(241,235,228,.75)}
 img[data-batch-src]{background:linear-gradient(135deg,rgba(191,147,118,.12),rgba(255,255,255,.3))}
 img.is-image-ready{transition:none}
 #about,#countdown-section,#time-line,#album,#message,#form,#gift,#thankyou{content-visibility:visible;contain-intrinsic-size:auto}

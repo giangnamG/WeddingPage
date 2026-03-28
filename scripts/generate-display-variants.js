@@ -45,6 +45,22 @@ const buildVariant = async (absoluteSourcePath, basename, width) => {
   return `./${toPosixPath(path.relative(rootDir, absoluteTargetPath))}`;
 };
 
+const buildPlaceholder = async (absoluteSourcePath, basename, width, height) => {
+  const placeholderWidth = width >= height ? 128 : 96;
+  const fileName = `${basename}-tiny.webp`;
+  const absoluteTargetPath = path.join(outputDir, fileName);
+
+  if (!fs.existsSync(absoluteTargetPath)) {
+    await sharp(absoluteSourcePath)
+      .resize({ width: placeholderWidth, withoutEnlargement: true })
+      .blur(0.6)
+      .webp({ quality: 54, effort: 4 })
+      .toFile(absoluteTargetPath);
+  }
+
+  return `./${toPosixPath(path.relative(rootDir, absoluteTargetPath))}`;
+};
+
 const buildManifest = async () => {
   ensureDir(outputDir);
 
@@ -67,6 +83,7 @@ const buildManifest = async () => {
     const widths = getWidths({ width, height, basename: parsed.name });
     const safeWidths = widths.length ? widths : [width];
     const sourcesForImage = [];
+    const placeholder = await buildPlaceholder(absoluteSourcePath, parsed.name, width, height);
 
     for (const variantWidth of safeWidths) {
       const url = await buildVariant(absoluteSourcePath, parsed.name, variantWidth);
@@ -76,6 +93,7 @@ const buildManifest = async () => {
     manifest[source] = {
       aspectRatio: Number((width / height).toFixed(4)),
       orientation: width >= height ? "landscape" : "portrait",
+      placeholder,
       sources: sourcesForImage,
     };
   }
