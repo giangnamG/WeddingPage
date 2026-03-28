@@ -30,6 +30,8 @@
     return "default";
   };
 
+  const isPersistentRole = (role) => ["album", "timeline", "card", "invite"].includes(role);
+
   const getTargetWidth = (img, entry) => {
     const role = getRole(img);
 
@@ -37,14 +39,15 @@
       case "hero":
         return 1280;
       case "album":
-        return window.matchMedia("(max-width: 767px)").matches ? 640 : 960;
+        return window.matchMedia("(max-width: 767px)").matches ? 480 : 640;
       case "timeline":
+        return window.matchMedia("(max-width: 767px)").matches ? 480 : 640;
       case "card":
-        return 640;
+        return window.matchMedia("(max-width: 767px)").matches ? 640 : 640;
       case "invite":
         return 320;
       default:
-        return entry.orientation === "landscape" ? 960 : 640;
+        return entry.orientation === "landscape" ? 768 : 480;
     }
   };
 
@@ -55,16 +58,17 @@
       case "hero":
         return "100vw";
       case "album":
-        return "(max-width: 767px) calc(100vw - 40px), (max-width: 1023px) 50vw, 33vw";
+        return "(max-width: 767px) 45vw, (max-width: 1023px) 33vw, 25vw";
       case "timeline":
+        return "(max-width: 767px) 45vw, 40vw";
       case "card":
         return "(max-width: 767px) calc(100vw - 40px), 50vw";
       case "invite":
         return "120px";
       default:
         return entry.orientation === "landscape"
-          ? "(max-width: 767px) 100vw, 80vw"
-          : "(max-width: 767px) calc(100vw - 40px), 50vw";
+          ? "(max-width: 767px) 70vw, 50vw"
+          : "(max-width: 767px) 45vw, 33vw";
     }
   };
 
@@ -81,17 +85,33 @@
       return;
     }
 
+    const role = getRole(img);
     const target = pickSource(entry.sources, getTargetWidth(img, entry));
     if (!target) {
       return;
     }
 
     img.dataset.originalSrc = originalSrc;
+    img.dataset.responsiveRole = role;
     img.setAttribute("srcset", entry.sources.map((source) => `${source.url} ${source.width}w`).join(", "));
     img.setAttribute("sizes", getSizes(img, entry));
 
     if (img.getAttribute("src") !== target.url) {
       img.setAttribute("src", target.url);
+    }
+
+    if (role === "hero") {
+      img.loading = "eager";
+      img.decoding = "auto";
+      img.setAttribute("fetchpriority", "high");
+      return;
+    }
+
+    if (isPersistentRole(role)) {
+      img.dataset.persistentImage = "true";
+      img.loading = "eager";
+      img.decoding = "auto";
+      img.setAttribute("fetchpriority", "low");
     }
   });
 })();

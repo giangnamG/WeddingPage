@@ -21,10 +21,10 @@ const getWidths = ({ width, height, basename }) => {
   }
 
   if (width >= height) {
-    return [480, 960, 1280].filter((value) => value <= width);
+    return [480, 768, 960, 1280].filter((value) => value <= width);
   }
 
-  return [320, 640, 960].filter((value) => value <= width);
+  return [320, 480, 640, 960].filter((value) => value <= width);
 };
 
 const ensureDir = (dirPath) => {

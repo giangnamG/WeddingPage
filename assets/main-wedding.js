@@ -6,7 +6,7 @@
   const isConstrainedNetwork = Boolean(connection && (connection.saveData
     || /(^|slow-)2g/.test(connection.effectiveType || "")));
   const overlay = window.weddingLoader;
-  const managedImages = Array.from(document.querySelectorAll("img[data-batch-src], img[loading='lazy']"))
+  const managedImages = Array.from(document.querySelectorAll("img[data-batch-src], img[loading='lazy'], img[data-persistent-image='true']"))
     .filter((img) => !img.classList.contains("banner_top"));
   const INITIAL_BATCH_SIZE = mobileQuery.matches ? 4 : 6;
   const PREFETCH_CONCURRENCY = isConstrainedNetwork ? 1 : (mobileQuery.matches ? 1 : 2);
@@ -370,6 +370,9 @@
       img.decoding = "auto";
       if (!img.hasAttribute("fetchpriority")) {
         img.setAttribute("fetchpriority", "low");
+      }
+      if (img.complete && img.naturalWidth > 0) {
+        markImageReady(img);
       }
     });
 

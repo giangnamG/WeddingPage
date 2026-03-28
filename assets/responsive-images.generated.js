@@ -30,6 +30,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/AN_09583-320.webp"
       },
       {
+        "width": 480,
+        "url": "./webp/responsive/AN_09583-480.webp"
+      },
+      {
         "width": 640,
         "url": "./webp/responsive/AN_09583-640.webp"
       },
@@ -46,6 +50,10 @@ window.responsiveImageManifest = {
       {
         "width": 320,
         "url": "./webp/responsive/AN_08326-320.webp"
+      },
+      {
+        "width": 480,
+        "url": "./webp/responsive/AN_08326-480.webp"
       },
       {
         "width": 640,
@@ -66,6 +74,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/AN_09356-480.webp"
       },
       {
+        "width": 768,
+        "url": "./webp/responsive/AN_09356-768.webp"
+      },
+      {
         "width": 960,
         "url": "./webp/responsive/AN_09356-960.webp"
       },
@@ -82,6 +94,10 @@ window.responsiveImageManifest = {
       {
         "width": 320,
         "url": "./webp/responsive/AN_08453-320.webp"
+      },
+      {
+        "width": 480,
+        "url": "./webp/responsive/AN_08453-480.webp"
       },
       {
         "width": 640,
@@ -102,6 +118,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/AN_08621-320.webp"
       },
       {
+        "width": 480,
+        "url": "./webp/responsive/AN_08621-480.webp"
+      },
+      {
         "width": 640,
         "url": "./webp/responsive/AN_08621-640.webp"
       },
@@ -118,6 +138,10 @@ window.responsiveImageManifest = {
       {
         "width": 320,
         "url": "./webp/responsive/AN_08735-320.webp"
+      },
+      {
+        "width": 480,
+        "url": "./webp/responsive/AN_08735-480.webp"
       },
       {
         "width": 640,
@@ -138,6 +162,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/AN_08942-320.webp"
       },
       {
+        "width": 480,
+        "url": "./webp/responsive/AN_08942-480.webp"
+      },
+      {
         "width": 640,
         "url": "./webp/responsive/AN_08942-640.webp"
       },
@@ -154,6 +182,10 @@ window.responsiveImageManifest = {
       {
         "width": 480,
         "url": "./webp/responsive/DUC_3026-480.webp"
+      },
+      {
+        "width": 768,
+        "url": "./webp/responsive/DUC_3026-768.webp"
       },
       {
         "width": 960,
@@ -174,6 +206,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/DUC_3608-480.webp"
       },
       {
+        "width": 768,
+        "url": "./webp/responsive/DUC_3608-768.webp"
+      },
+      {
         "width": 960,
         "url": "./webp/responsive/DUC_3608-960.webp"
       },
@@ -190,6 +226,10 @@ window.responsiveImageManifest = {
       {
         "width": 480,
         "url": "./webp/responsive/DUC_3675-480.webp"
+      },
+      {
+        "width": 768,
+        "url": "./webp/responsive/DUC_3675-768.webp"
       },
       {
         "width": 960,
@@ -210,6 +250,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/DUC_3772-480.webp"
       },
       {
+        "width": 768,
+        "url": "./webp/responsive/DUC_3772-768.webp"
+      },
+      {
         "width": 960,
         "url": "./webp/responsive/DUC_3772-960.webp"
       },
@@ -226,6 +270,10 @@ window.responsiveImageManifest = {
       {
         "width": 480,
         "url": "./webp/responsive/DUC_3552-480.webp"
+      },
+      {
+        "width": 768,
+        "url": "./webp/responsive/DUC_3552-768.webp"
       },
       {
         "width": 960,
@@ -246,6 +294,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/DUC_3573-480.webp"
       },
       {
+        "width": 768,
+        "url": "./webp/responsive/DUC_3573-768.webp"
+      },
+      {
         "width": 960,
         "url": "./webp/responsive/DUC_3573-960.webp"
       },
@@ -262,6 +314,10 @@ window.responsiveImageManifest = {
       {
         "width": 480,
         "url": "./webp/responsive/DUC_3620-480.webp"
+      },
+      {
+        "width": 768,
+        "url": "./webp/responsive/DUC_3620-768.webp"
       },
       {
         "width": 960,
@@ -282,6 +338,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/DUC_3649-320.webp"
       },
       {
+        "width": 480,
+        "url": "./webp/responsive/DUC_3649-480.webp"
+      },
+      {
         "width": 640,
         "url": "./webp/responsive/DUC_3649-640.webp"
       },
@@ -298,6 +358,10 @@ window.responsiveImageManifest = {
       {
         "width": 320,
         "url": "./webp/responsive/DUC_3795-320.webp"
+      },
+      {
+        "width": 480,
+        "url": "./webp/responsive/DUC_3795-480.webp"
       },
       {
         "width": 640,
@@ -318,6 +382,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/AN_00356-320.webp"
       },
       {
+        "width": 480,
+        "url": "./webp/responsive/AN_00356-480.webp"
+      },
+      {
         "width": 640,
         "url": "./webp/responsive/AN_00356-640.webp"
       },
@@ -334,6 +402,10 @@ window.responsiveImageManifest = {
       {
         "width": 320,
         "url": "./webp/responsive/AN_00457-320.webp"
+      },
+      {
+        "width": 480,
+        "url": "./webp/responsive/AN_00457-480.webp"
       },
       {
         "width": 640,
@@ -354,6 +426,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/AN_XXXX-320.webp"
       },
       {
+        "width": 480,
+        "url": "./webp/responsive/AN_XXXX-480.webp"
+      },
+      {
         "width": 640,
         "url": "./webp/responsive/AN_XXXX-640.webp"
       }
@@ -366,6 +442,10 @@ window.responsiveImageManifest = {
       {
         "width": 320,
         "url": "./webp/responsive/AN_00318-320.webp"
+      },
+      {
+        "width": 480,
+        "url": "./webp/responsive/AN_00318-480.webp"
       },
       {
         "width": 640,
@@ -386,6 +466,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/AN_00286-320.webp"
       },
       {
+        "width": 480,
+        "url": "./webp/responsive/AN_00286-480.webp"
+      },
+      {
         "width": 640,
         "url": "./webp/responsive/AN_00286-640.webp"
       },
@@ -402,6 +486,10 @@ window.responsiveImageManifest = {
       {
         "width": 320,
         "url": "./webp/responsive/AN_09446-320.webp"
+      },
+      {
+        "width": 480,
+        "url": "./webp/responsive/AN_09446-480.webp"
       },
       {
         "width": 640,
@@ -422,6 +510,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/AN_09476-320.webp"
       },
       {
+        "width": 480,
+        "url": "./webp/responsive/AN_09476-480.webp"
+      },
+      {
         "width": 640,
         "url": "./webp/responsive/AN_09476-640.webp"
       },
@@ -438,6 +530,10 @@ window.responsiveImageManifest = {
       {
         "width": 320,
         "url": "./webp/responsive/AN_09456-320.webp"
+      },
+      {
+        "width": 480,
+        "url": "./webp/responsive/AN_09456-480.webp"
       },
       {
         "width": 640,
@@ -458,6 +554,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/AN_08637-320.webp"
       },
       {
+        "width": 480,
+        "url": "./webp/responsive/AN_08637-480.webp"
+      },
+      {
         "width": 640,
         "url": "./webp/responsive/AN_08637-640.webp"
       },
@@ -474,6 +574,10 @@ window.responsiveImageManifest = {
       {
         "width": 320,
         "url": "./webp/responsive/AN_08756-320.webp"
+      },
+      {
+        "width": 480,
+        "url": "./webp/responsive/AN_08756-480.webp"
       },
       {
         "width": 640,
@@ -494,6 +598,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/AN_00079-320.webp"
       },
       {
+        "width": 480,
+        "url": "./webp/responsive/AN_00079-480.webp"
+      },
+      {
         "width": 640,
         "url": "./webp/responsive/AN_00079-640.webp"
       },
@@ -510,6 +618,10 @@ window.responsiveImageManifest = {
       {
         "width": 320,
         "url": "./webp/responsive/AN_09943-320.webp"
+      },
+      {
+        "width": 480,
+        "url": "./webp/responsive/AN_09943-480.webp"
       },
       {
         "width": 640,
@@ -530,6 +642,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/AN_00092-320.webp"
       },
       {
+        "width": 480,
+        "url": "./webp/responsive/AN_00092-480.webp"
+      },
+      {
         "width": 640,
         "url": "./webp/responsive/AN_00092-640.webp"
       },
@@ -546,6 +662,10 @@ window.responsiveImageManifest = {
       {
         "width": 320,
         "url": "./webp/responsive/AN_08978-320.webp"
+      },
+      {
+        "width": 480,
+        "url": "./webp/responsive/AN_08978-480.webp"
       },
       {
         "width": 640,
@@ -566,6 +686,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/AN_08987-480.webp"
       },
       {
+        "width": 768,
+        "url": "./webp/responsive/AN_08987-768.webp"
+      },
+      {
         "width": 960,
         "url": "./webp/responsive/AN_08987-960.webp"
       },
@@ -582,6 +706,10 @@ window.responsiveImageManifest = {
       {
         "width": 320,
         "url": "./webp/responsive/AN_09937-320.webp"
+      },
+      {
+        "width": 480,
+        "url": "./webp/responsive/AN_09937-480.webp"
       },
       {
         "width": 640,
@@ -602,6 +730,10 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/AN_09698-320.webp"
       },
       {
+        "width": 480,
+        "url": "./webp/responsive/AN_09698-480.webp"
+      },
+      {
         "width": 640,
         "url": "./webp/responsive/AN_09698-640.webp"
       },
@@ -618,6 +750,10 @@ window.responsiveImageManifest = {
       {
         "width": 320,
         "url": "./webp/responsive/AN_00024-320.webp"
+      },
+      {
+        "width": 480,
+        "url": "./webp/responsive/AN_00024-480.webp"
       },
       {
         "width": 640,
