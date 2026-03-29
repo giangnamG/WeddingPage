@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Giang Nam 💝 Huệ Anh</title>
     <meta name="description"
-        content="Thiệp cưới online của Giang Nam và Huệ Anh. Trân trọng kính mời bạn đến chung vui trong ngày trọng đại của chúng mình.">
+        content="Thiệp cưới online của Giang Nam và Huệ Anh. Trân trọng kính mời các bác/cô/chú/anh/chị/bạn bè đến chung vui trong ngày trọng đại của đôi bạn trẻ.">
     <meta name="robots" content="max-image-preview:large">
     <link rel="canonical" href="https://giangnam-hueanh.io.vn/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Giang Nam 💝 Huệ Anh">
     <meta property="og:description"
-        content="Thiệp cưới online của Giang Nam và Huệ Anh. Trân trọng kính mời bạn đến chung vui trong ngày trọng đại của chúng mình.">
+        content="Thiệp cưới online của Giang Nam và Huệ Anh. Trân trọng kính mời các bác/cô/chú/anh/chị/bạn bè đến chung vui trong ngày trọng đại của đôi bạn trẻ.">
     <meta property="og:url" content="https://giangnam-hueanh.io.vn/">
     <meta property="og:image" content="https://giangnam-hueanh.io.vn/webp/AN_08516.webp">
     <meta property="og:image:secure_url" content="https://giangnam-hueanh.io.vn/webp/AN_08516.webp">
@@ -21,7 +21,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Giang Nam 💝 Huệ Anh">
     <meta name="twitter:description"
-        content="Thiệp cưới online của Giang Nam và Huệ Anh. Trân trọng kính mời bạn đến chung vui trong ngày trọng đại của chúng mình.">
+        content="Thiệp cưới online của Giang Nam và Huệ Anh. Trân trọng kính mời các bác/cô/chú/anh/chị/bạn bè đến chung vui trong ngày trọng đại của đôi bạn trẻ.">
     <meta name="twitter:image" content="https://giangnam-hueanh.io.vn/webp/AN_08516.webp">
     <link rel="stylesheet" id="uikit-css" href="./assets/uikit.min.css" media="all">
     <link data-minify="1" rel="stylesheet" id="reset uikit-css" href="./assets/reset.css" media="all">
@@ -539,8 +539,8 @@
                 <div class="wish-form-heading">
                     <span class="wish-form-kicker">Wedding Wishes</span>
                     <h3 class="form-title">Gửi lời chúc</h3>
-                    <p class="wish-form-description">Một lời nhắn chân thành của bạn sẽ là món quà rất đẹp dành cho
-                        chúng mình.</p>
+                    <p class="wish-form-description">Một lời nhắn chân thành của quý vị sẽ là món quà rất đẹp dành cho
+                        đôi bạn trẻ.</p>
                 </div>
 
                 <form action="/" id="messageForm" method="POST" class="wish-form">
@@ -586,7 +586,7 @@
                     <div class="rsvp-form-heading">
                         <span class="rsvp-kicker">Répondez s'il vous plaît</span>
                         <h2 class="section-title">Xác nhận tham dự</h2>
-                        <p class="sub-title">Hãy cho chúng tôi biết bạn sẽ đến tham dự để chúng mình đón tiếp chu đáo
+                        <p class="sub-title">Hãy cho chúng tôi biết quý vị sẽ đến tham dự để Gia Đình đón tiếp chu đáo
                             nhất.</p>
                     </div>
 
@@ -646,7 +646,8 @@
                         </div>
 
                         <div class="rsvp-actions">
-                            <p class="rsvp-helper">Sự hiện diện của bạn là món quà quý giá nhất dành cho chúng mình.</p>
+                            <p class="rsvp-helper">Sự hiện diện của quý vị là món quà quý giá nhất dành cho gia đình
+                                chúng tôi.</p>
                             <button type="submit" class="wedding-submit">
                                 <i class="ri-mail-check-line"></i>
                                 Xác nhận tham dự
@@ -758,13 +759,13 @@
 
                     try {
                         await postToSheet(payload);
-                        setFeedback(feedback, 'Cảm ơn bạn đã gửi lời chúc cho chúng mình!');
+                        setFeedback(feedback, 'Cảm ơn quý vị đã gửi lời chúc cho đôi bạn trẻ!');
                         wishForm.reset();
                         if (button) {
                             button.textContent = 'Đã gửi';
                         }
                     } catch (error) {
-                        setFeedback(feedback, 'Có lỗi khi gửi lời chúc. Bạn vui lòng thử lại giúp chúng mình nhé.');
+                        setFeedback(feedback, 'Có lỗi khi gửi lời chúc. Quý vị vui lòng thử lại nhé.');
                         if (button) {
                             button.disabled = false;
                             button.textContent = originalText;
@@ -811,7 +812,7 @@
 
                     try {
                         await postToSheet(payload);
-                        setFeedback(feedback, 'Chúng mình xin chân thành cảm ơn!');
+                        setFeedback(feedback, 'Xin chân thành cảm ơn!');
                         if (button) {
                             button.classList.add('success');
                             button.classList.remove('btn_primary');
@@ -823,7 +824,7 @@
                             }
                         });
                     } catch (error) {
-                        setFeedback(feedback, 'Có lỗi khi gửi xác nhận. Bạn vui lòng thử lại giúp chúng mình nhé.');
+                        setFeedback(feedback, 'Có lỗi khi gửi xác nhận. Quý vị vui lòng thử lại nhé.');
                         if (button) {
                             button.disabled = false;
                             button.textContent = originalText;
