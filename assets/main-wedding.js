@@ -517,7 +517,23 @@
   const audioToggle = document.querySelector(".toggleAudio");
 
   if (audio && audioToggle) {
+    const AUDIO_PREF_KEY = "wedding-audio-enabled";
     let playbackUnlocked = false;
+    let autoplayBlocked = false;
+
+    const persistAudioPreference = (isEnabled) => {
+      try {
+        window.localStorage.setItem(AUDIO_PREF_KEY, isEnabled ? "on" : "off");
+      } catch (error) {}
+    };
+
+    const shouldTryAutoplay = () => {
+      try {
+        return window.localStorage.getItem(AUDIO_PREF_KEY) !== "off";
+      } catch (error) {
+        return true;
+      }
+    };
 
     const updateAudioIcon = () => {
       const icon = audioToggle.querySelector("i");
@@ -525,17 +541,33 @@
         return;
       }
 
+      const isWaitingForInteraction = autoplayBlocked && audio.paused;
       icon.classList.toggle("ri-volume-up-fill", !audio.paused);
-      icon.classList.toggle("ri-volume-mute-fill", audio.paused);
+      icon.classList.toggle("ri-volume-mute-fill", audio.paused && !isWaitingForInteraction);
+      icon.classList.toggle("ri-play-circle-line", isWaitingForInteraction);
+
+      const label = !audio.paused
+        ? "Tắt nhạc nền"
+        : (isWaitingForInteraction ? "Chạm để bật nhạc nền" : "Bật nhạc nền");
+      audioToggle.setAttribute("aria-label", label);
+      audioToggle.setAttribute("title", label);
     };
 
-    const attemptAutoplay = async () => {
+    const attemptAutoplay = async ({ fromInteraction = false } = {}) => {
+      if (!fromInteraction && !shouldTryAutoplay()) {
+        updateAudioIcon();
+        return false;
+      }
+
       try {
         await audio.play();
         playbackUnlocked = true;
+        autoplayBlocked = false;
+        persistAudioPreference(true);
         updateAudioIcon();
         return true;
       } catch (error) {
+        autoplayBlocked = true;
         updateAudioIcon();
         return false;
       }
@@ -546,7 +578,7 @@
         return;
       }
 
-      const started = await attemptAutoplay();
+      const started = await attemptAutoplay({ fromInteraction: true });
       if (started) {
         detachUnlockListeners();
       }
@@ -568,10 +600,20 @@
 
     audio.addEventListener("play", () => {
       playbackUnlocked = true;
+      autoplayBlocked = false;
+      persistAudioPreference(true);
       updateAudioIcon();
     });
 
-    audio.addEventListener("pause", updateAudioIcon);
+    audio.addEventListener("pause", () => {
+      updateAudioIcon();
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden && audio.paused) {
+        attemptAutoplay();
+      }
+    });
 
     attemptAutoplay();
 
@@ -580,11 +622,13 @@
 
       try {
         if (isPaused) {
-          await audio.play();
-          playbackUnlocked = true;
-          detachUnlockListeners();
+          const started = await attemptAutoplay({ fromInteraction: true });
+          if (started) {
+            detachUnlockListeners();
+          }
         } else {
           audio.pause();
+          persistAudioPreference(false);
         }
       } catch (error) {
         updateAudioIcon();
