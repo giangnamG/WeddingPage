@@ -998,5 +998,32 @@ window.responsiveImageManifest = {
         "url": "./webp/responsive/AN_00024-1200.webp"
       }
     ]
+  },
+  "./webp/cô-dâu_tcb-new.jpg": {
+    "aspectRatio": 0.8195,
+    "orientation": "portrait",
+    "placeholder": "./webp/responsive/cô-dâu_tcb-new-tiny.webp",
+    "sources": [
+      {
+        "width": 320,
+        "url": "./webp/responsive/cô-dâu_tcb-new-320.webp"
+      },
+      {
+        "width": 480,
+        "url": "./webp/responsive/cô-dâu_tcb-new-480.webp"
+      },
+      {
+        "width": 640,
+        "url": "./webp/responsive/cô-dâu_tcb-new-640.webp"
+      },
+      {
+        "width": 960,
+        "url": "./webp/responsive/cô-dâu_tcb-new-960.webp"
+      },
+      {
+        "width": 1049,
+        "url": "./webp/responsive/cô-dâu_tcb-new-1049.webp"
+      }
+    ]
   }
 };
