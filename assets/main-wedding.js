@@ -640,4 +640,148 @@
 
     updateAudioIcon();
   }
+
+  const shareLinks = Array.from(document.querySelectorAll(".social-share-link"));
+  const shareFeedback = document.getElementById("share-feedback");
+
+  if (shareLinks.length) {
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches || navigator.maxTouchPoints > 0;
+    const isIOS = /iPad|iPhone|iPod/i.test(navigator.userAgent);
+    const canonicalUrl = document.querySelector("link[rel='canonical']")?.href || window.location.href;
+    const shareUrl = canonicalUrl;
+    const shareTitle = document.querySelector("meta[property='og:title']")?.content || document.title;
+    const shareDescription = document.querySelector("meta[name='description']")?.content
+      || "Trân trọng kính mời bạn đến chung vui trong ngày trọng đại của chúng mình.";
+    const rawImage = document.querySelector("meta[property='og:image']")?.content || "./webp/AN_08516.webp";
+    const shareImage = new URL(rawImage, shareUrl).href;
+    const shareText = `${shareTitle} - ${shareDescription}`;
+
+    const showShareFeedback = (message) => {
+      if (!shareFeedback) {
+        return;
+      }
+
+      shareFeedback.textContent = message;
+      shareFeedback.classList.add("is-visible");
+
+      window.clearTimeout(showShareFeedback.timeoutId);
+      showShareFeedback.timeoutId = window.setTimeout(() => {
+        shareFeedback.classList.remove("is-visible");
+      }, 3200);
+    };
+
+    const shareTargets = {
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
+      x: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`,
+      pinterest: `https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(shareUrl)}&media=${encodeURIComponent(shareImage)}&description=${encodeURIComponent(shareText)}`,
+    };
+    const instagramFallbackUrl = "https://www.instagram.com/";
+
+    const openSharePopup = (url) => {
+      const popup = window.open(
+        url,
+        "share-dialog",
+        "width=720,height=720,left=120,top=80,noopener,noreferrer"
+      );
+
+      if (!popup) {
+        window.open(url, "_blank", "noopener,noreferrer");
+      }
+    };
+
+    const openShareTarget = (url) => {
+      if (isTouchDevice) {
+        window.location.href = url;
+        return;
+      }
+
+      openSharePopup(url);
+    };
+
+    const openInstagramFallback = () => {
+      if (isIOS) {
+        window.location.href = instagramFallbackUrl;
+        return;
+      }
+
+      openSharePopup(instagramFallbackUrl);
+    };
+
+    const shareWithNativeSheet = async () => {
+      if (!navigator.share) {
+        return false;
+      }
+
+      try {
+        await navigator.share({
+          title: shareTitle,
+          text: shareDescription,
+          url: shareUrl,
+        });
+        return true;
+      } catch (error) {
+        if (error?.name === "AbortError") {
+          return true;
+        }
+        return false;
+      }
+    };
+
+    const copyShareLink = async () => {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+        return true;
+      }
+
+      const tempInput = document.createElement("input");
+      tempInput.value = shareUrl;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      const copied = document.execCommand("copy");
+      tempInput.remove();
+      return copied;
+    };
+
+    shareLinks.forEach((link) => {
+      link.addEventListener("click", async (event) => {
+        const platform = link.dataset.sharePlatform;
+        if (!platform) {
+          return;
+        }
+
+        if (platform === "instagram") {
+          event.preventDefault();
+
+          if (isTouchDevice) {
+            const shared = await shareWithNativeSheet();
+            if (shared) {
+              return;
+            }
+          }
+
+          try {
+            const copied = await copyShareLink();
+            if (copied) {
+              showShareFeedback("Liên kết thiệp đã được sao chép. Instagram sẽ được mở để bạn dán vào bài đăng hoặc story.");
+            } else {
+              showShareFeedback("Instagram sẽ được mở. Bạn vui lòng dán liên kết thiệp để chia sẻ.");
+            }
+          } catch (error) {
+            showShareFeedback("Instagram sẽ được mở. Bạn vui lòng dán liên kết thiệp để chia sẻ.");
+          }
+
+          openInstagramFallback();
+          return;
+        }
+
+        const targetUrl = shareTargets[platform];
+        if (!targetUrl) {
+          return;
+        }
+
+        event.preventDefault();
+        openShareTarget(targetUrl);
+      });
+    });
+  }
 })();
