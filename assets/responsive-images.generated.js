@@ -161,6 +161,33 @@ window.responsiveImageManifest = {
       }
     ]
   },
+  "./webp/AN_09236.webp": {
+    "aspectRatio": 0.6667,
+    "orientation": "portrait",
+    "placeholder": "./webp/responsive/AN_09236-tiny.webp",
+    "sources": [
+      {
+        "width": 320,
+        "url": "./webp/responsive/AN_09236-320.webp"
+      },
+      {
+        "width": 480,
+        "url": "./webp/responsive/AN_09236-480.webp"
+      },
+      {
+        "width": 640,
+        "url": "./webp/responsive/AN_09236-640.webp"
+      },
+      {
+        "width": 960,
+        "url": "./webp/responsive/AN_09236-960.webp"
+      },
+      {
+        "width": 1200,
+        "url": "./webp/responsive/AN_09236-1200.webp"
+      }
+    ]
+  },
   "./webp/AN_08735.webp": {
     "aspectRatio": 0.6667,
     "orientation": "portrait",
